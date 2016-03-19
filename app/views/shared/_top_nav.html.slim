@@ -1,0 +1,20 @@
+ul.nav.navbar-top-links.navbar-right
+  li.dropdown
+    = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
+      i.fa.fa-user.fa-fw
+      i.fa.fa-caret-down
+    ul.dropdown-menu.dropdown-user
+      li
+        = link_to '#' do
+          i.fa.fa-user.fa-fw
+          |&nbsp; User Profile
+      li
+        = link_to '#' do
+          i.fa.fa-gear.fa-fw
+          |&nbsp; Settings
+      li.divider
+      li
+        = link_to logout_path, method: :delete do
+          i.fa.fa-sign-out.fa-fw
+          |&nbsp; Logout
+      /! /.navbar-top-links

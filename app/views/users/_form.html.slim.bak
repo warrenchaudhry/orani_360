@@ -1,0 +1,33 @@
+= f.input :first_name
+= f.input :middle_name
+= f.input :last_name
+= f.input :suffix
+= f.input :email
+= f.input :birthdate, start_year: 1900
+= f.input :gender, collection: [['Male', 'male'], ['Female', 'female']], selected: f.object.gender, prompt: 'Please Select'
+= f.input :civil_status, collection: %w(Single Married Divorced Widowed), selected: f.object.gender, prompt: 'Please Select'
+= f.input :address1
+= f.input :address2
+= f.input :city
+= f.input :province
+= f.input :province
+= f.input :country
+= f.input :postal_code
+= f.input :occupation
+= f.input :referred_by
+
+#contacts-fields
+  h4 Contact Numbers
+  hr
+  = f.simple_fields_for :contact_numbers do |ff|
+    = ff.input :contact_number
+    = ff.input :contact_type, collection: ['Home', 'Mobile', 'Work', 'Others'], selected: ff.object.contact_type, prompt: 'Please Select'
+    .col-sm-6.col-sm-offset-3
+      = ff.link_to_remove "Remove", class: 'pull-right btn btn-xs btn-danger', style: 'margin-bottom:20px;'
+    .clearfix
+.col-md-9.col-md-offset-3= f.link_to_add 'Add Contact Number', :contact_numbers, data: {target: '#contacts-fields'}, class: "btn btn-info btn-xs"
+.clearfix
+hr
+
+
+

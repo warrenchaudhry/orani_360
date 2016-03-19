@@ -1,0 +1,21 @@
+.navbar-default.sidebar role="navigation"
+  .sidebar-nav.navbar-collapse
+    ul#side-menu.nav
+      li.sidebar-search
+        .input-group.custom-search-form
+          = text_field_tag :keyword, params[:keyword], class: 'form-control', placeholder: 'Search...'
+          span.input-group-btn
+            button.btn.btn-default type='button'
+              i.fa.fa-search
+      li
+        = link_to dashboards_path do
+          i.fa.fa-dashboard.fa-fw
+          | &nbsp;Dashboard
+      li
+        = link_to "" do
+          i.fa.fa-users
+          | &nbsp;Admin
+      li
+        = link_to "" do
+          i.fa.fa-users
+          | &nbsp;Job Orders

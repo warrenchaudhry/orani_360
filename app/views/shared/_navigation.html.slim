@@ -1,0 +1,11 @@
+nav.navbar.navbar-default.navbar-static-top role="navigation" style="margin-bottom: 0"
+  .navbar-header
+    button.navbar-toggle type="button" data-toggle="collapse" data-target=".navbar-collapse"
+      span.sr-only Toggle navigation
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+    = link_to 'JO', dashboards_path, class: 'navbar-brand'
+    /! /.navbar-header
+  = render 'shared/top_nav'
+  = render 'shared/menu_sidebar'
