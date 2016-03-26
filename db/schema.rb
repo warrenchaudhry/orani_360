@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221084412) do
+ActiveRecord::Schema.define(version: 20160319083809) do
+
+  create_table "consumer_types", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.integer  "created_by"
+    t.integer  "last_updated_by"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "contact_numbers", force: :cascade do |t|
     t.string   "contact_number"
@@ -21,6 +30,27 @@ ActiveRecord::Schema.define(version: 20160221084412) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "account_no"
+    t.string   "last_name"
+    t.string   "first_name"
+    t.string   "mi",               limit: 1
+    t.string   "zone"
+    t.string   "street"
+    t.string   "barangay"
+    t.string   "municipality"
+    t.string   "province"
+    t.integer  "consumer_type_id"
+    t.date     "date_connected"
+    t.string   "status",                     default: "active"
+    t.integer  "created_by"
+    t.integer  "last_updated_by"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+  end
+
+  add_index "customers", ["account_no"], name: "index_customers_on_account_no", unique: true
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

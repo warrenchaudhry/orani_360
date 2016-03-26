@@ -13,4 +13,21 @@ module ApplicationHelper
     end
     nil
   end
+
+  def add_new_resource_link
+    link = link_to 'Add New <i class="fa fa-plus"></i>'.html_safe, url_for(controller: controller_name, action: 'new'), class: 'btn btn-sm btn-primary'
+    raw(link)
+  end
+
+  def prettify_value(obj, attr)
+
+    if obj.class.column_names.include?(attr) && obj.column_for_attribute(attr).type == :datetime
+      obj.send(attr).to_s(:long)
+    elsif attr == 'mi'
+      "#{obj.send(attr)}."
+    else
+      obj.send(attr)
+    end
+  end
+
 end

@@ -12,10 +12,20 @@
           i.fa.fa-dashboard.fa-fw
           | &nbsp;Dashboard
       li
-        = link_to "" do
-          i.fa.fa-users
+        = link_to "#" do
+          i.fa.fa-sitemap.fa-fw
           | &nbsp;Admin
+          span.fa.arrow
+        ul.nav.nav-second-level
+          li = link_to "Users", "#"
+          li = link_to "Team", "#"
+          li = link_to "Job Order Types", "#"
+          li = link_to "Consumer Types", consumer_types_path
       li
-        = link_to "" do
+        = link_to customers_path do
+          i.fa.fa-users
+          | &nbsp;Customers
+      li
+        = link_to "#" do
           i.fa.fa-users
           | &nbsp;Job Orders

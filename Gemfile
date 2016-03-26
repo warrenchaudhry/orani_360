@@ -33,6 +33,8 @@ gem 'nested_form'
 gem 'countries', '~> 0.11.4'
 gem 'country_select', '~> 2.2.0'
 gem 'bootstrap-datepicker-rails'
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+gem 'validates_timeliness', '~> 4.0'
 
 
 # Code dependencies

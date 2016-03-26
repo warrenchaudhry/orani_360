@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :consumer_types
+  resources :customers
   root :to => 'dashboards#index'
   resources :dashboards, only: [:index]
   resources :user_sessions

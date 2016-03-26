@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :set_page_title
 
   def home
-    logged_in? ? redirect_to(users_path) : redirect_to(login_path)
+    logged_in? ? redirect_to(dashboards_path) : redirect_to(login_path)
   end
 
   def set_page_title

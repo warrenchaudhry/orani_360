@@ -39,4 +39,10 @@ $(function() {
     if (element.is('li')) {
         element.addClass('active');
     }
+
+    dataConfirmModal.setDefaults({
+      title: 'Confirm your action',
+      commit: 'Continue',
+      cancel: 'Cancel'
+    });
 });

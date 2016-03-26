@@ -17,7 +17,7 @@
 //= require jquery_nested_form
 //= require metisMenu/dist/metisMenu
 //= require raphael/raphael
-
+//= require data-confirm-modal
 //= require core
 
 //= require_tree .
