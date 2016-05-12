@@ -9,7 +9,7 @@ class Page < ActiveRecord::Base
   before_save :build_meta, :assign_default
   validates :title, presence: true
   validates_uniqueness_of :title
-  validates_numericality_of :display_order
+  validates_numericality_of :display_order, allow_blank: true
   validates_date :publish_date, on_or_before: lambda { Date.current }, allow_blank: true
   default_scope -> { where("page_type = ?", 'page') }
   scope :root, -> {where(is_root: true)}
