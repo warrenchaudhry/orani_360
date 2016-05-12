@@ -21,5 +21,5 @@ homepage = Page.create!({title: 'Home', body: '<p>Lorem ipsum dolor sit amet</p>
 end
 contactpage = Page.where(is_contact: true).first
 if contactpage.nil?
-contactpage = Page.create!({title: 'Contact Us', page_url: 'contact-us', body: '', active: true, is_contact: true, is_required: true, created_by: admin.id, last_updated_by: admin.id})
+contactpage = Page.create!({title: 'Contact Us', body: '', active: true, is_contact: true, is_required: true, created_by: admin.id, last_updated_by: admin.id})
 end
