@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module JobOrderApp
+module InboxCms
   class Application < Rails::Application
     # Use the responders controller from the responders gem
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}'), Rails.root.join('app', 'inputs', '{**}'), Rails.root.join('lib')]
@@ -21,7 +21,7 @@ module JobOrderApp
     config.assets.initialize_on_precompile = false
     config.assets.raise_runtime_errors = false
 
-    config.time_zone = 'Asia/Taipei'
+    config.time_zone = 'Asia/Manila'
 
     config.encoding = 'utf-8'
 

@@ -1,9 +1,0 @@
-= simple_nested_form_for @consumer_type, url: consumer_types_path, wrapper: :horizontal_form, html: {class: "form-horizontal"} do |f|
-  = f.error_notification
-  .form-inputs
-    = render 'form', f: f
-  br
-  .row style="padding-bottom: 30px;margin-bottom: 20px;"
-    .col-md-6.col-md-offset-6.col-sm-6.col-sm-offset-6
-      = f.button :submit, class: 'btn btn-primary'
-      = link_to 'Cancel', url_for(controller: controller_name, action: 'index'), class: 'btn btn-default', style: 'margin-left: 5px;'

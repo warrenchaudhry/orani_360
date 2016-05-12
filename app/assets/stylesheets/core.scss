@@ -256,6 +256,10 @@ table.dataTable thead .sorting:after {
     color: rgba(50,50,50,.5);
 }
 
+.no-sort::after { display: none!important; }
+
+.no-sort { pointer-events: none!important; cursor: default!important; }
+
 .btn-circle {
     width: 30px;
     height: 30px;

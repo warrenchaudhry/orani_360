@@ -11,25 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319083809) do
+ActiveRecord::Schema.define(version: 20160511224203) do
 
-  create_table "consumer_types", force: :cascade do |t|
-    t.string   "name"
-    t.string   "code"
-    t.integer  "created_by"
-    t.integer  "last_updated_by"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.string   "data_fingerprint"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
-  create_table "contact_numbers", force: :cascade do |t|
-    t.string   "contact_number"
-    t.string   "contact_type"
-    t.integer  "contactable_id"
-    t.string   "contactable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type"
 
   create_table "customers", force: :cascade do |t|
     t.string   "account_no"
@@ -52,6 +51,50 @@ ActiveRecord::Schema.define(version: 20160319083809) do
 
   add_index "customers", ["account_no"], name: "index_customers_on_account_no", unique: true
 
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "pages", force: :cascade do |t|
+    t.string   "title"
+    t.string   "subtitle"
+    t.string   "slug"
+    t.text     "body"
+    t.text     "short_body"
+    t.integer  "page_id"
+    t.date     "publish_date"
+    t.boolean  "active",             default: true
+    t.integer  "display_order"
+    t.boolean  "show_in_menu",       default: true
+    t.boolean  "is_required",        default: false
+    t.boolean  "is_root",            default: false
+    t.boolean  "is_contact",         default: false
+    t.string   "page_type",          default: "page"
+    t.string   "published_by"
+    t.boolean  "is_featured",        default: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.text     "meta_description"
+    t.string   "meta_title"
+    t.integer  "created_by"
+    t.integer  "last_updated_by"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "pages", ["slug"], name: "index_pages_on_slug"
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -68,7 +111,7 @@ ActiveRecord::Schema.define(version: 20160319083809) do
     t.string   "crypted_password"
     t.string   "salt"
     t.string   "first_name"
-    t.string   "middle_name"
+    t.string   "mi"
     t.string   "last_name"
     t.string   "suffix"
     t.date     "birthdate"

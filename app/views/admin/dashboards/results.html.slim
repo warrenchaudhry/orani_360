@@ -1,0 +1,24 @@
+table.table.table-bordered.table-striped
+  thead
+    tr
+      th.text-center Region
+      th.text-center CAYETANO, ALAN PETER (IND)
+      th.text-center ESCUDERO, CHIZ (IND)
+      th.text-center MARCOS, BONGBONG (IND)
+      th.text-center TRILLANES, ANTONIO IV (IND)
+      th.text-center ROBREDO, LENI DAANG MATUWID (LP)
+      th.text-center HONASAN, GRINGO (UNA)
+  tbody
+    - @data.each do |data|
+      tr
+        td = data['location_code']
+        - data['result'][1]['candidates'].each do |x|
+          td.text-right = number_with_delimiter(x['vote_count'])
+
+    tr
+      td
+        strong Total
+      - candidates = @data.collect {|x| x['result'][1]['candidates'] }
+      - 0.upto(5).each do |i|
+        td.text-right
+          b = number_with_delimiter(candidates.collect {|x| x[i]['vote_count'].to_i }.sum)

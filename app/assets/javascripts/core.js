@@ -1,5 +1,4 @@
-$(function() {
-
+$(document).on('ready page:load', function () {
     $('#side-menu').metisMenu();
     if ($('.datepicker').length > 0){
         $('.datepicker').datepicker({
@@ -8,7 +7,9 @@ $(function() {
         });
     }
 
+    $('#table-listing').dataTable();
 });
+
 
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.

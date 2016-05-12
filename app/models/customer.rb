@@ -1,7 +1,6 @@
 class Customer < ActiveRecord::Base
-  belongs_to :consumer_type
-  has_many :contact_numbers, as: :contactable,  dependent: :destroy
-  accepts_nested_attributes_for :contact_numbers, allow_destroy: true, :reject_if => :all_blank
+  include Responsible
+
   validates :first_name, :last_name, :mi, :consumer_type_id, presence: true
   validates_date :date_connected, on_or_before: lambda { Date.current }, allow_blank: true
   before_save :sanitize_string_fields

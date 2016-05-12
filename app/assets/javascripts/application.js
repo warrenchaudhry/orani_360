@@ -18,6 +18,8 @@
 //= require metisMenu/dist/metisMenu
 //= require raphael/raphael
 //= require data-confirm-modal
+//= require dataTables/jquery.dataTables
+//= require dataTables/dataTables.bootstrap
 //= require core
 
 //= require_tree .

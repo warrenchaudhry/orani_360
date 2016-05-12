@@ -8,24 +8,23 @@
             button.btn.btn-default type='button'
               i.fa.fa-search
       li
-        = link_to dashboards_path do
-          i.fa.fa-dashboard.fa-fw
-          | &nbsp;Dashboard
+        = sidebar_link('dashboards', 'Dashboard', 'fa fa-dashboard fa-fw')
       li
-        = link_to "#" do
-          i.fa.fa-sitemap.fa-fw
-          | &nbsp;Admin
-          span.fa.arrow
-        ul.nav.nav-second-level
-          li = link_to "Users", "#"
-          li = link_to "Team", "#"
-          li = link_to "Job Order Types", "#"
-          li = link_to "Consumer Types", consumer_types_path
+        = sidebar_link('pages', 'Pages', 'fa fa-dashboard fa-fw')
       li
-        = link_to customers_path do
-          i.fa.fa-users
-          | &nbsp;Customers
-      li
-        = link_to "#" do
-          i.fa.fa-users
-          | &nbsp;Job Orders
+        = sidebar_link('users', 'Users', 'fa fa-users')
+      /- expanded = %w{users teams job_order_types consumer_types}.include?(controller_name)
+      /li *{class: (expanded ? 'active' : nil) }
+      /  = link_to "#", 'aria-expanded' => (expanded ? true : false), class: (expanded ? 'collapse in' : nil) do
+      /    i.fa.fa-sitemap.fa-fw
+      /    | &nbsp;Admin
+      /    span.fa.arrow
+      /  ul.nav.nav-second-level *{'aria-expanded' => (expanded ? true : false)}
+      /    - %w{users teams job_order_types consumer_types}.each do |con|
+      /      li = sidebar_link(con)
+      /li
+      /  = sidebar_link('customers', nil, 'fa fa-users')
+      /li
+      /  = link_to "#" do
+      /    i.fa.fa-fax
+      /    | &nbsp;Job Orders

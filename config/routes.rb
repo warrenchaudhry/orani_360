@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
-  resources :consumer_types
-  resources :customers
-  root :to => 'dashboards#index'
-  resources :dashboards, only: [:index]
-  resources :user_sessions
-  resources :users
+  
+  mount Ckeditor::Engine => '/ckeditor'
+  root :to => 'sample#home'
+  namespace :admin do
+    get 'results', to: 'dashboards#results'
+    resources :dashboards, only: [:index]
+    resources :customers
+    resources :sessions
+    resources :users
+    resources :pages
 
-  get 'login' => 'user_sessions#new', :as => :login
-  delete 'logout' => 'user_sessions#destroy', :as => :logout
+    get 'login' => 'sessions#new', :as => :login
+    delete 'logout' => 'sessions#destroy', :as => :logout
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

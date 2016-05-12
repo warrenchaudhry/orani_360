@@ -17,6 +17,7 @@ gem 'aws-s3', '~> 0.6.3'
 gem 'aws-sdk', '~> 1.36.1'
 
 
+
 # Front end
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass'
@@ -40,7 +41,11 @@ gem 'validates_timeliness', '~> 4.0'
 # Code dependencies
 gem 'sorcery'
 gem 'rolify'
+gem 'friendly_id', '~> 5.1.0'
+gem 'iconv'
 gem 'paperclip', '~> 4.3.5'
+gem 'ckeditor', github: 'galetahub/ckeditor'
+gem 'httparty'
 
 
 

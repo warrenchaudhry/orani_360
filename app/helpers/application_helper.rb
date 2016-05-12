@@ -22,12 +22,36 @@ module ApplicationHelper
   def prettify_value(obj, attr)
 
     if obj.class.column_names.include?(attr) && obj.column_for_attribute(attr).type == :datetime
-      obj.send(attr).to_s(:long)
+      dt = obj.send(attr)
+
+      val = "#{time_ago_in_words(obj.send(attr))} ago"
+    elsif obj.class.column_names.include?(attr) && obj.column_for_attribute(attr).type == :boolean
+      val = obj.send(attr) ? 'Yes' : 'No'
     elsif attr == 'mi'
-      "#{obj.send(attr)}."
+      val = "#{obj.send(attr)}."
     else
-      obj.send(attr)
+      val = obj.send(attr)
     end
+    return '--' if val.blank?
+    val
+  end
+
+  def sidebar_link(resource_name, label = nil, icon_class = nil)
+    link_to send("admin_#{resource_name}_path"), class: (controller_name == resource_name ? 'active' : nil) do
+      if icon_class.present?
+        concat(content_tag(:i, nil, class: icon_class))
+      end
+      concat(content_tag(:span, label.present? ? label : resource_name.humanize.titleize, class: 'link_label'))
+    end
+  end
+
+  def formalize_header(attr)
+    if attr == 'editor'
+      header = 'Last Updated By'
+    else
+      header = attr.humanize.titleize
+    end
+    header
   end
 
 end

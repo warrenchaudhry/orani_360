@@ -1,0 +1,9 @@
+= f.input :title
+= f.input :subtitle
+= f.input :body, as: :ckeditor, input_html: { ckeditor: {toolbar: 'Full'} }
+= f.input :short_body
+= f.input :meta_title
+= f.input :meta_description
+= f.input :display_order
+= f.input :page_id, collection: Page.active.collect {|p| [p.title, p.id] }, selected: f.object.page_id, include_blank: 'Please Select', label: 'Parent'
+= f.input :publish_date, as: :date, start_year: Date.today.year, end_year: 1950, include_blank: true
