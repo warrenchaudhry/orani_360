@@ -2,6 +2,10 @@ class Admin::PagesController < Admin::BaseController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
   before_action :check_role, only: [:destroy]
 
+
+  def set_page_title
+    @page_title = "Pages Management"
+  end
   # GET /pages
   # GET /pages.json
   def index

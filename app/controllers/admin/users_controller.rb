@@ -7,15 +7,14 @@ class Admin::UsersController < Admin::BaseController
 
   def new
     @user = User.new
-    @user.contact_numbers.build
   end
 
   def create
     @user = User.new(user_params)
     if @user.valid?
       @user.save
-      flash[:success] = 'User has been added'
-      redirect_to users_path
+      flash[:success] = 'User has been created'
+      redirect_to admin_users_path
     else
       p @user.errors.full_messages
       render :new
@@ -29,7 +28,7 @@ class Admin::UsersController < Admin::BaseController
   def update
     if @user.update_attributes(user_params)
       flash[:success] = 'User has been updated'
-      redirect_to users_path
+      redirect_to admin_users_path
     else
       render :edit
     end
@@ -41,6 +40,6 @@ class Admin::UsersController < Admin::BaseController
     end
 
     def user_params
-      params.require(:user).permit!
+      params.require(:user).permit(:first_name, :last_name, :mi, :suffix, :email, :gender, :birthdate, :role, :password, :password_confirmation, :active)
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511224203) do
+ActiveRecord::Schema.define(version: 20160514085728) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -50,6 +50,16 @@ ActiveRecord::Schema.define(version: 20160511224203) do
   end
 
   add_index "customers", ["account_no"], name: "index_customers_on_account_no", unique: true
+
+  create_table "deposit_attachments", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -95,6 +105,41 @@ ActiveRecord::Schema.define(version: 20160511224203) do
 
   add_index "pages", ["slug"], name: "index_pages_on_slug"
 
+  create_table "registrations", force: :cascade do |t|
+    t.string   "registration_no"
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "middle_name"
+    t.string   "occupation"
+    t.string   "grp_org_comp"
+    t.text     "residential_address"
+    t.integer  "age"
+    t.string   "gender"
+    t.date     "birth_date"
+    t.string   "contact_numbers"
+    t.string   "emergency_contact_name"
+    t.string   "emergency_contact_number"
+    t.boolean  "receive_newsletters",      default: false
+    t.boolean  "terms_accepted",           default: false
+    t.datetime "terms_accepted_by"
+    t.integer  "age_on_race_day"
+    t.boolean  "paid_online",              default: false
+    t.boolean  "approved",                 default: false
+    t.datetime "approved_at"
+    t.integer  "approved_by"
+    t.string   "category"
+    t.string   "singlet"
+    t.boolean  "confirmation_sent",        default: false
+    t.datetime "confirmation_sent_at"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -107,7 +152,7 @@ ActiveRecord::Schema.define(version: 20160511224203) do
   add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                           null: false
+    t.string   "email",                                          null: false
     t.string   "crypted_password"
     t.string   "salt"
     t.string   "first_name"
@@ -128,6 +173,7 @@ ActiveRecord::Schema.define(version: 20160511224203) do
     t.datetime "last_logout_at"
     t.datetime "last_activity_at"
     t.string   "last_login_from_ip_address"
+    t.boolean  "active",                          default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

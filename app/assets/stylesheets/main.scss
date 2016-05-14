@@ -1,0 +1,12 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "bootstrap-datepicker3";
+
+.has-error {
+  .control-label, label.boolean {
+    color: #000 !important;
+  }
+}
+

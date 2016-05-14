@@ -10,12 +10,18 @@ body {
 
 #wrapper {
     width: 100%;
+    padding-left:0 !important;
+    padding-right:0 !important;
 }
 
 #page-wrapper {
     padding: 0 15px;
     min-height: 568px;
     background-color: #fff;
+
+    .alert.alert-dismissible {
+      margin-top:10px;
+    }
 }
 
 @media(min-width:768px) {
@@ -355,4 +361,10 @@ table.dataTable thead .sorting:after {
 
 .panel-yellow a:hover {
     color: #df8a13;
+}
+
+.sidebar-nav {
+  .link-label {
+    margin-left: 5px;
+  }
 }

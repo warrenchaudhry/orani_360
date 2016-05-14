@@ -1,5 +1,14 @@
-.container-fluid
-  .form-header
-    h1 Add New User
+= f.input :first_name
+= f.input :mi, label: 'Middle Initial', input_html: {maxlength: 1}
+= f.input :last_name
+= f.input :suffix
+= f.input :email
+= f.input :birthdate, start_year: Date.current.year, end_year: 1950, prompt: { day: 'Day', month: 'Month', year: 'Year' }
+= f.input :gender, collection: [['Male', 'male'], ['Female', 'female']], selected: f.object.gender, prompt: 'Please Select'
+- if f.object.new_record?
+  = f.input :role, collection: [['Admin', 'admin'], ['Editor', 'editor']], selected: f.object.role, prompt: 'Please Select'
+  = f.input :password
+  = f.input :password_confirmation
+
 
 

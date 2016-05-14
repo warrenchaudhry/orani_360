@@ -35,7 +35,7 @@ gem 'countries', '~> 0.11.4'
 gem 'country_select', '~> 2.2.0'
 gem 'bootstrap-datepicker-rails'
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
-gem 'validates_timeliness', '~> 4.0'
+gem 'simple_form_fancy_uploads'
 
 
 # Code dependencies
@@ -46,6 +46,7 @@ gem 'iconv'
 gem 'paperclip', '~> 4.3.5'
 gem 'ckeditor', github: 'galetahub/ckeditor'
 gem 'httparty'
+gem 'validates_timeliness', '~> 4.0'
 
 
 

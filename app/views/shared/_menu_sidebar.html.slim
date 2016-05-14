@@ -10,9 +10,12 @@
       li
         = sidebar_link('dashboards', 'Dashboard', 'fa fa-dashboard fa-fw')
       li
-        = sidebar_link('pages', 'Pages', 'fa fa-dashboard fa-fw')
+        = sidebar_link('pages', 'Pages', 'fa fa-book')
       li
-        = sidebar_link('users', 'Users', 'fa fa-users')
+        = sidebar_link('registrations', 'Registrations', 'fa fa-registered')
+      - if current_user.is_admin?
+        li
+          = sidebar_link('users', 'Users', 'fa fa-users')
       /- expanded = %w{users teams job_order_types consumer_types}.include?(controller_name)
       /li *{class: (expanded ? 'active' : nil) }
       /  = link_to "#", 'aria-expanded' => (expanded ? true : false), class: (expanded ? 'collapse in' : nil) do

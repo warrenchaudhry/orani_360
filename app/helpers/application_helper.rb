@@ -24,7 +24,7 @@ module ApplicationHelper
     if obj.class.column_names.include?(attr) && obj.column_for_attribute(attr).type == :datetime
       dt = obj.send(attr)
 
-      val = "#{time_ago_in_words(obj.send(attr))} ago"
+      val = "#{time_ago_in_words(obj.send(attr))} ago" rescue nil
     elsif obj.class.column_names.include?(attr) && obj.column_for_attribute(attr).type == :boolean
       val = obj.send(attr) ? 'Yes' : 'No'
     elsif attr == 'mi'
@@ -41,7 +41,7 @@ module ApplicationHelper
       if icon_class.present?
         concat(content_tag(:i, nil, class: icon_class))
       end
-      concat(content_tag(:span, label.present? ? label : resource_name.humanize.titleize, class: 'link_label'))
+      concat(content_tag(:span, label.present? ? label : resource_name.humanize.titleize, class: 'link-label'))
     end
   end
 
@@ -52,6 +52,16 @@ module ApplicationHelper
       header = attr.humanize.titleize
     end
     header
+  end
+
+  def generate_breadcrumbs
+    html = '<ol class="breadcrumb">' +
+            '<li><a href='"#{admin_dashboards_path}"'><span class="fa fa-home"></span> Dashboard</a></li>' +
+            '<li><a href='"#{url_for(controller: controller_name, action: 'index')}"'>' + controller_name.humanize.titleize + '</a></li>' +
+            '<li class="active">' + action_name.capitalize + '</li>' +
+            '</ol>'
+
+    raw(html)
   end
 
 end

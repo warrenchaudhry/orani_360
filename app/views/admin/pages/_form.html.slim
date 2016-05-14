@@ -7,3 +7,11 @@
 = f.input :display_order
 = f.input :page_id, collection: Page.active.collect {|p| [p.title, p.id] }, selected: f.object.page_id, include_blank: 'Please Select', label: 'Parent'
 = f.input :publish_date, as: :date, start_year: Date.today.year, end_year: 1950, include_blank: true
+.form-group.clearfix
+  .col-md-8.col-md-offset-2
+    = f.check_box :show_in_menu
+    | &nbsp;Show in menu?
+.form-group.clearfix
+  .col-md-8.col-md-offset-2
+    = f.check_box :active
+    | &nbsp;Is published?

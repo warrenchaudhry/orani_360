@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Registration no:
+  = @registration.registration_no
+p
+  strong Email:
+  = @registration.email
+p
+  strong First name:
+  = @registration.first_name
+p
+  strong Last name:
+  = @registration.last_name
+p
+  strong Middle name:
+  = @registration.middle_name
+
+= link_to 'Edit', edit_registration_path(@registration)
+'|
+= link_to 'Back', registrations_path

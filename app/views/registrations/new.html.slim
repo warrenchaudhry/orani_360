@@ -1,0 +1,14 @@
+.row
+  .text-center
+    = image_tag('orani-360.jpg', class: 'img-responsive center-block', style: 'width: 100%;')
+    h3
+      em August 14, 2016 | Orani Plaza
+br
+.row
+  .col-lg-12
+    .panel.panel-primary
+      .panel-heading
+        | New registration
+      .panel-body
+        == render 'form'
+
