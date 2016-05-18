@@ -15,6 +15,10 @@ class Admin::RegistrationsController < Admin::BaseController
     @registration = Registration.new
   end
 
+  def show
+
+  end
+
   def create
     @registration = Registration.new(registration_params)
 

@@ -21,5 +21,4 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/dataTables.bootstrap
 //= require core
-
-//= require_tree .
+//= require basepath

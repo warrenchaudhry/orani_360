@@ -12,5 +12,5 @@ html
     /[if IE]
       script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"
   body
-    #wrapper.container style="margin-top:60px;margin-bottom:60px;"
-      = yield
+    = render 'shared/front/top_nav'
+    = yield

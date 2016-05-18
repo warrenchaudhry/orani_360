@@ -1,29 +1,30 @@
-h1 Listing registrations
+#wrapper.container style="margin-top:60px;margin-bottom:60px;"
+  h1 Listing registrations
 
-table.table.table-striped
-  thead
-    tr
-      th Registration no
-      th Email
-      th First name
-      th Last name
-      th Middle name
-      th
-      th
-      th
-
-  tbody
-    - @registrations.each do |registration|
+  table.table.table-striped
+    thead
       tr
-        td = registration.registration_no
-        td = registration.email
-        td = registration.first_name
-        td = registration.last_name
-        td = registration.middle_name
-        td = link_to 'Show', registration
-        td = link_to 'Edit', edit_registration_path(registration)
-        td = link_to 'Destroy', registration, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th Registration no
+        th Email
+        th First name
+        th Last name
+        th Middle name
+        th
+        th
+        th
 
-br
+    tbody
+      - @registrations.each do |registration|
+        tr
+          td = registration.registration_no
+          td = registration.email
+          td = registration.first_name
+          td = registration.last_name
+          td = registration.middle_name
+          td = link_to 'Show', registration
+          td = link_to 'Edit', edit_registration_path(registration)
+          td = link_to 'Destroy', registration, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-= link_to 'New Registration', new_registration_path
+  br
+
+  = link_to 'New Registration', new_registration_path
