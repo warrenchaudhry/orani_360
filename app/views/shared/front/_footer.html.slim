@@ -3,4 +3,7 @@
   footer
     .row
       .col-lg-12
-        p Copyright © #{Date.current.year}
+        p
+          | Copyright ©
+          = link_to " Inbox Business Solutions ", "http://inbox.com.ph", target: "_blank"
+          | #{Date.current.year}
