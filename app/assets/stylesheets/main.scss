@@ -11,7 +11,13 @@ $dropDown       : false;
 
 
 body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+  font-family: 'Lato', sans-serif;
+  padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Oswald", sans-serif;
+  font-weight: 700;
 }
 
 .navbar-default {
@@ -107,7 +113,7 @@ footer {
     font-weight:bold;
   }
 }
-table#registration-details {
+table.registration-details {
   thead {
     th {
       background: #ffc940;
@@ -117,6 +123,7 @@ table#registration-details {
       font-weight:bold;
       text-align:center;
       font-style:italic;
+      text-transform:uppercase;
     }
   }
   tbody {
@@ -149,6 +156,13 @@ table#registration-details {
     }
     td.e-3k {
       background:#ff6225;
+    }
+  }
+  tfoot {
+    td {
+      color:#27317f;
+      font-size:14px;
+      font-style:italic;
     }
   }
 }
