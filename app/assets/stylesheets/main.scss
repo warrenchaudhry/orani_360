@@ -8,6 +8,7 @@ $bgHighlight    : #0a3aac;
 $colDefault     : #ecf0f1;
 $colHighlight   : #f7f5f5;
 $dropDown       : false;
+$regInfoDefault : #27317f;
 
 
 body {
@@ -112,33 +113,57 @@ footer {
     font-size: 36px;
     font-weight:bold;
   }
+  @media (max-width: 767px) {
+    font-size: 20px;
+    span {
+      font-size: 22px;
+    }
+  }
 }
+
 table.registration-details {
-  thead {
-    th {
+  background: #fffeff !important;
+  th, td {
+    background:#fffeff;
+  }
+  th {
       background: #ffc940;
       border:none;
-      color: #fff;
+      color: #27317f;
       font-size:24px;
       font-weight:bold;
       text-align:center;
       font-style:italic;
       text-transform:uppercase;
-    }
+      vertical-align: middle;
   }
   tbody {
     td {
-      color:#27317f;
+      color:$regInfoDefault;
       font-size:24px;
       font-weight:bold;
       text-align:center;
       height:80px;
       vertical-align:middle;
     }
+
     td:first-child {
       color:#fff;
       font-size:24px;
-      width:27%;
+      &.events {
+        width:27%;
+      }
+      &.registration-info {
+        font-size: 16px;
+        color: $regInfoDefault;
+        font-style: normal;
+      }
+      &.registration-extras {
+        font-size: 14px;
+        color: $regInfoDefault;
+        font-style: normal;
+        text-align:left;
+      }
     };
     td:last-child {
       font-size:20px;
@@ -165,6 +190,9 @@ table.registration-details {
       font-style:italic;
     }
   }
+}
+.jumbotron {
+  background: #4f6fea;
 }
 .has-error {
   .control-label, label.boolean {

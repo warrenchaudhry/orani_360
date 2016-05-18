@@ -20,4 +20,9 @@ $(document).on("page:load ready", function(){
       $(this).html('This offer has expired!')
       .parent().addClass('disabled');
     });
+    
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
 });

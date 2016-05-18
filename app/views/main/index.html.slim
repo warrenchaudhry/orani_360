@@ -1,5 +1,5 @@
 .container
-  .row style="margin-top:-30px;"
+  .row style=""
     .col-md-8
       = image_tag('orani-360-banner.jpg', class: 'img-responsive img-rounded')
     .col-md-4
@@ -19,27 +19,12 @@
     .countdown
       p#clock.lead.text-center
   hr
-  .row-fluid
-    table.registration-details.table.table-striped.table-bordered
-      thead
-        tr
-          th Category
-          th Registration Fee
-          th Inclusions
-        tbody
-          tr
-            td.e-21k 21K
-            td Php 700
-            td race bib, singlet, certificate, medal, finisher shirt and meal
-          tr
-            td.e-10k 10K
-            td Php 450
-            td race bib, singlet, certificate, medal and snacks
-          tr
-            td.e-5k 5K
-            td Php 300
-            td race bib, singlet, certificate and snacks
-          tr
-            td.e-3k 3K
-            td Php 250
-            td race bib, singlet, certificate and snacks
+  .jumbotron
+    .row-fluid
+      == render 'main/table1'
+
+    .row
+      == render 'main/table3'
+
+    .row-fluid
+      == render 'main/table2'

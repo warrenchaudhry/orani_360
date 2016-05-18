@@ -6,13 +6,20 @@ html
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width, initial-scale=1"
     = stylesheet_link_tag    'main', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.css', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'main', 'data-turbolinks-track' => true
-    = javascript_include_tag Ckeditor.cdn_url
-    = csrf_meta_tags
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.js'
     link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'
     link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'
+    = csrf_meta_tags
     /[if IE]
       script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"
   body
     = render 'shared/front/top_nav'
-    = yield
+
+
+    /! page content here
+    == yield
+
+    /! footer here
+    == render 'shared/front/footer'
