@@ -6,11 +6,12 @@ html
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta name="viewport" content="width=device-width, initial-scale=1"
     = stylesheet_link_tag    'main', media: 'all', 'data-turbolinks-track' => true
-    = stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.css', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    '//cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.css', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'main', 'data-turbolinks-track' => true
-    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.js'
-    link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'
-    link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'
+    = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.js'
+
+    link href='//fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'
+    link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'
     = csrf_meta_tags
     /[if IE]
       script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"
@@ -18,8 +19,14 @@ html
     = render 'shared/front/top_nav'
 
 
-    /! page content here
-    == yield
+    .container
+      /! flash alerts here
+      == flash_messages
 
-    /! footer here
+      /! page content starts here
+      == yield
+
+      /! page content ends here
+
+    /! footer starts here
     == render 'shared/front/footer'

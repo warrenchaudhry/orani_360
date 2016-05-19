@@ -136,6 +136,9 @@ table.registration-details {
       font-style:italic;
       text-transform:uppercase;
       vertical-align: middle;
+      @media (max-width: 767px) {
+        font-size: 16px;
+      }
   }
   tbody {
     td {
@@ -145,6 +148,9 @@ table.registration-details {
       text-align:center;
       height:80px;
       vertical-align:middle;
+      @media (max-width: 767px) {
+        font-size: 16px;
+      }
     }
 
     td:first-child {
@@ -169,6 +175,9 @@ table.registration-details {
       font-size:20px;
       font-style:italic;
       text-align:center;
+      @media (max-width: 767px) {
+        font-size: 14px;
+      }
     };
     td.e-21k {
       background:#071d9d;

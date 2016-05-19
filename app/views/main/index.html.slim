@@ -1,30 +1,29 @@
-.container
-  .row style=""
-    .col-md-8
-      = image_tag('orani-360-banner.jpg', class: 'img-responsive img-rounded')
-    .col-md-4
-      h2
-        | Orani 360 Half Marathon
-        br
-          small
-            | August 14, 2016 4:30am
-            br
-            | Orani, Bataan
+.row style=""
+  .col-md-8
+    = image_tag('orani-360-banner.jpg', class: 'img-responsive img-rounded')
+  .col-md-4
+    h2
+      | Orani 360 Half Marathon
       br
-      br
-      = link_to 'Register Now', new_registration_path, class: 'btn btn-primary btn-lg'
+        small
+          | August 14, 2016 4:30am
+          br
+          | Orani, Bataan
+    br
+    br
+    = link_to 'Register Now', new_registration_path, class: 'btn btn-primary btn-lg'
 
-  hr
+hr
+.row
+  .countdown
+    p#clock.lead.text-center
+hr
+.jumbotron
+  .row-fluid
+    == render 'main/table1'
+
   .row
-    .countdown
-      p#clock.lead.text-center
-  hr
-  .jumbotron
-    .row-fluid
-      == render 'main/table1'
+    == render 'main/table3'
 
-    .row
-      == render 'main/table3'
-
-    .row-fluid
-      == render 'main/table2'
+  .row-fluid
+    == render 'main/table2'

@@ -1,0 +1,13 @@
+.modal.fade id="termsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true"
+            | &times;
+        h4 class="modal-title" id="myModalLabel" Terms and Conditions
+      .modal-body
+        == render 'shared/front/terms_panel'
+
+      .modal-footer
+        button type="button" class="btn btn-default" data-dismiss="modal" Close

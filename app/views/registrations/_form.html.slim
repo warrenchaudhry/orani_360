@@ -48,17 +48,12 @@
                   = f.input :attachment, label: 'Attach Deposit Slip'
               .row
                 .col-md-12
-                  = f.input :terms_accepted, label: ' I have read the <b>RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK, AND INDEMNITY AGREEMENT</b>'.html_safe
+                  = f.input :terms_accepted, label: ' I have read the <b><a href="#" data-toggle="modal" data-target="#termsModal">RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK, AND INDEMNITY AGREEMENT</a></b>'.html_safe
               .form-actions
                 .row-fluid
                   .text-right
                     = f.button :submit, class: 'btn btn-primary', value: 'Register', data: {disable_with: 'Saving....'}
-                    = link_to 'Cancel', url_for(controller: controller_name, action: 'index'), class: 'btn btn-default', style: 'margin-left: 5px;'
+                    = link_to 'Cancel', root_path, class: 'btn btn-default', style: 'margin-left: 5px;'
 
-      .col-md-5
-        .panel.panel-default
-          .panel-heading
-            h4 Release and Waiver of Liability, Assumption of Risk and Indemnity Agreement
-          .panel-body
-            p style="font-size:16px;" I understand that running and/or walking are strenuous and potentially dangerous activities. I am fully aware of and assume all risks associated with this event including but not limited to: great physical stress, falls, contact with other runners, spectators or obstacles, adverse weather and road conditions, and the presence of vehicular traffic on the race course. I fully assume responsibility for my own safety (including proper training, stretching, and hydrating) while participating in this event and verify that I am physically able to compete. Having read this wavier, I agree to RELEASE from LIABILITY, ASSUMPTION OF RISK and INDEMNITY to Orani Runners "Orani 360 Half Marathon" race committee and their officers and all sponsors, officials, representatives and anyone associated with Orani Runners. For any and all liability for any injury or damages whatsoever incurred by me and anyone accompanying me, (including minors I am responsible for during this event), resulting from any participation in this event.
-            p style="font-size:16px;" I consent to the use of photographs, video and/or interview information of me or of my child. I authorize medical treatment deemed advisable by any licensed health care provider to relieve any injuries or illness while a participant or observer. I understand that no accident or medical insurance for participants is provided. I understand that shirt size cannot be guaranteed. I acknowledge that the registration fee is non-refundable. I certify that I have read this document and agree with its contents.
+      .col-md-5.hidden-xs
+        == render 'shared/front/terms_panel'
