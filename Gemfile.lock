@@ -144,14 +144,15 @@ GEM
     method_source (0.8.2)
     mime-types (2.99.1)
     mimemagic (0.3.0)
-    mini_portile2 (2.0.0)
+    mini_portile2 (2.1.0)
     minitest (5.8.4)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     nested_form (0.3.2)
-    nokogiri (1.6.7.2)
-      mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.6.8.rc3)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     oauth (0.5.1)
     oauth2 (1.1.0)
       faraday (>= 0.8, < 0.10)
@@ -167,6 +168,7 @@ GEM
       mime-types
       mimemagic (= 0.3.0)
     pg (0.18.4)
+    pkg-config (1.1.7)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -329,6 +331,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   nested_form
+  nokogiri (~> 1.6.8.rc2)
   paperclip (~> 4.3.5)
   pg
   pry-rails

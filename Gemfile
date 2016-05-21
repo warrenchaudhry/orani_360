@@ -47,7 +47,7 @@ gem 'paperclip', '~> 4.3.5'
 gem 'ckeditor', github: 'galetahub/ckeditor'
 gem 'httparty'
 gem 'validates_timeliness', '~> 4.0'
-
+gem 'nokogiri', '~> 1.6.8.rc2'
 
 
 
