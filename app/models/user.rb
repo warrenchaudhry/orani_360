@@ -7,11 +7,12 @@ class User < ActiveRecord::Base
   attr_accessor :is_admin, :role
   EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: EMAIL_REGEX
-  validates :first_name, :last_name, :mi, :gender, :birthdate, presence: true
+  validates :first_name, :last_name, :mi, :gender, presence: true
   validates :role, :password, :password_confirmation, presence: true, on: :create
   validates :password, length: { minimum: 8 }, if: -> { new_record? || changes["password"] }
   validates :password, confirmation: true, if: -> { new_record? || changes["password"] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes["password"] }
+  validates_date :birth_date, on_or_before: lambda { Date.current }, allow_blank: true
 
   after_create :set_role
   def to_s

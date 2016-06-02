@@ -54,6 +54,10 @@ module ApplicationHelper
   def formalize_header(attr)
     if attr == 'editor'
       header = 'Last Updated By'
+    elsif attr == 'display_name'
+      header = 'Name'
+    elsif attr == 'last_login_from_ip_address'
+      header = 'IP Address'
     else
       header = attr.humanize.titleize
     end
