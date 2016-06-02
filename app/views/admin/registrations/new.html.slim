@@ -5,9 +5,6 @@
       .panel-heading
         = "#{action_name == 'edit' ? 'Edit' : 'Add New'} #{controller_name.singularize.humanize.titleize}"
       .panel-body
-        = render 'form'
-          /br
-          /.row style="padding-bottom: 30px;margin-bottom: 20px;"
-          /  .col-md-3.col-md-offset-6.col-sm-6.col-sm-offset-6
-          /    = f.button :submit, class: 'btn btn-primary'
-          /    = link_to 'Cancel', url_for(controller: controller_name, action: 'index'), class: 'btn btn-default', style: 'margin-left: 5px;'
+        = simple_form_for @registration, url: admin_registrations_path, html: {multipart: true}  do |f|
+          = f.error_notification
+          = render 'form', f: f

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160514085728) do
+ActiveRecord::Schema.define(version: 20160523154952) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -120,24 +120,33 @@ ActiveRecord::Schema.define(version: 20160514085728) do
     t.string   "contact_numbers"
     t.string   "emergency_contact_name"
     t.string   "emergency_contact_number"
-    t.boolean  "receive_newsletters",      default: false
-    t.boolean  "terms_accepted",           default: false
-    t.datetime "terms_accepted_by"
+    t.boolean  "receive_newsletters",                              default: false
+    t.boolean  "terms_accepted",                                   default: false
+    t.datetime "terms_accepted_at"
     t.integer  "age_on_race_day"
-    t.boolean  "paid_online",              default: false
-    t.boolean  "approved",                 default: false
+    t.boolean  "paid_online",                                      default: false
+    t.boolean  "approved",                                         default: false
     t.datetime "approved_at"
     t.integer  "approved_by"
     t.string   "category"
     t.string   "singlet"
-    t.boolean  "confirmation_sent",        default: false
+    t.boolean  "confirmation_sent",                                default: false
     t.datetime "confirmation_sent_at"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
+    t.boolean  "is_walk_in",                                       default: false
+    t.boolean  "admin_encoded",                                    default: false
+    t.boolean  "is_paid_on_site",                                  default: false
+    t.boolean  "active",                                           default: true
+    t.string   "bank_name"
+    t.date     "date_registered"
+    t.boolean  "is_free_registraion",                              default: false
+    t.decimal  "discount",                 precision: 8, scale: 2, default: 0.0
+    t.decimal  "amount",                   precision: 8, scale: 2, default: 0.0
   end
 
   create_table "roles", force: :cascade do |t|

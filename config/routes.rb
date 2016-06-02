@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'main/index'
-
   mount Ckeditor::Engine => '/ckeditor'
   root :to => 'main#index'
   namespace :admin do
-    get 'results', to: 'dashboards#results'
+    get '/' => 'dashboards#index'
     resources :dashboards, only: [:index]
     resources :customers
     resources :sessions

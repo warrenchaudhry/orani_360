@@ -6,11 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 admin = User.find_by_email('admin@email.com')
-if admin.nil?
-admin = User.new email: 'admin@email.com', first_name: 'Warren', last_name: 'Chaudhry', password: 'secret123$', password_confirmation: 'secret123$', gender: 'Male'
+unless admin
+admin = User.new(email: 'admin@email.com', first_name: 'Inbox', mi: 'B', last_name: 'User', password: 'secret123$', password_confirmation: 'secret123$', gender: 'Male', birthdate: '1983-07-01', role: 'admin')
 admin.save
-admin.reload
-admin.add_role(:admin)
 end
 
 

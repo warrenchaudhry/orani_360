@@ -43,6 +43,8 @@
               .row
                 .col-md-6
                   = f.input :singlet, collection: Registration::SINGLET, selected: f.object.singlet, prompt: 'Please Select', label: 'Singlet Size'
+                .col-md-6
+                  = f.input :bank_name, collection: ['BDO', 'BPI'], selected: f.object.bank_name, prompt: 'Please Select'
               .row
                 .col-md-8
                   = f.input :attachment, label: 'Attach Deposit Slip'

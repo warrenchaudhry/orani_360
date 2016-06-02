@@ -7,4 +7,7 @@ class UserMailer < ApplicationMailer
     mail( to: user.email, subject: 'Your password has been reset')
   end
 
+  def registration_follow_up(registration)
+
+  end
 end

@@ -8,11 +8,28 @@ class Admin::RegistrationsController < Admin::BaseController
   # GET /pages
   # GET /pages.json
   def index
-    @registrations = Registration.all
+    params[:page] ||= 1
+    params[:per] ||= 25
+    registrations = Registration.active
+    if params[:q].present?
+      keyword = params[:q].strip.downcase
+      registrations = registrations.where('TRIM(LOWER(first_name)) LIKE ? OR TRIM(LOWER(middle_name)) LIKE ? OR TRIM(LOWER(last_name)) LIKE ?', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+    end
+    if params[:cat].present?
+      registrations = registrations.where(category: params[:cat])
+    end
+    @registrations = registrations.order('first_name').page(params[:page]).per(params[:per])
   end
 
   def new
     @registration = Registration.new
+    @registration.admin_encoded = true
+    @registration.is_paid_on_site = true
+    @registration.date_registered = Date.current
+  end
+
+  def edit
+
   end
 
   def show
@@ -21,13 +38,28 @@ class Admin::RegistrationsController < Admin::BaseController
 
   def create
     @registration = Registration.new(registration_params)
-
+    @registration.admin_encoded = true
+    @registration.approved = true
+    @registration.approved_at = Time.zone.now
+    @registration.approved_by = current_user.id
     respond_to do |format|
       if @registration.save
-        format.html { redirect_to @registration, notice: 'Registration was successfully created.' }
+        format.html { redirect_to admin_registrations_path, notice: 'Registration was successfully created.' }
         format.json { render :show, status: :created, location: @registration }
       else
         format.html { render :new }
+        format.json { render json: @registration.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @registration.update(registration_params)
+        format.html { redirect_to admin_registrations_path, notice: 'Registration was successfully updated.' }
+        format.json { render :show, status: :ok, location: @registration }
+      else
+        format.html { render :edit }
         format.json { render json: @registration.errors, status: :unprocessable_entity }
       end
     end
@@ -58,6 +90,6 @@ class Admin::RegistrationsController < Admin::BaseController
       params.require(:registration).permit(:registration_no, :email, :first_name, :last_name, :middle_name, :occupation, :grp_org_comp,
                                            :residential_address, :gender, :birth_date, :contact_numbers, :emergency_contact_name,
                                            :emergency_contact_number, :category, :singlet, :terms_accepted, :receive_newsletters, :approved,
-                                           :attachment )
+                                           :attachment, :date_registered, :admin_encoded, :is_paid_on_site, :bank_name, :is_free_registraion, :discount )
     end
 end

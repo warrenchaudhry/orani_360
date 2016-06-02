@@ -1,0 +1,10 @@
+.row
+  .col-lg-12
+    = generate_breadcrumbs
+    .panel.panel-primary
+      .panel-heading
+        = "#{action_name == 'edit' ? 'Edit' : 'New'} #{controller_name.singularize.humanize.titleize}"
+      .panel-body
+        = simple_form_for @registration, url: admin_registration_path(@registration), html: {multipart: true}  do |f|
+          = f.error_notification
+          = render 'form', f: f

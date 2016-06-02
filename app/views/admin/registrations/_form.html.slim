@@ -1,55 +1,71 @@
-= simple_form_for @registration, url: registrations_path, html: {multipart: true}  do |f|
-  = f.error_notification
-
-  .form-inputs
-    fieldset
+.form-inputs
+  fieldset
+    .row
+      .col-md-6
+        = f.input :registration_no, label: 'Registration No.'
+        = f.input :admin_encoded, as: :hidden, input_html: {value: f.object.admin_encoded?}
+      .col-md-6
+        = f.input :date_registered, wrapper: :inline_multi_select, start_year: Date.current.year, end_year: 2015, prompt: { day: 'Day', month: 'Month', year: 'Year' }
+    .row
+      .col-md-6
+        = f.input :email
+      .col-md-6
+        = f.input :category, collection: Registration.categories, selected: f.object.category, prompt: 'Please Select'
+    .row
+      .col-md-6
+        = f.input :first_name
+      .col-md-6
+        = f.input :last_name
+    .row
+      .col-md-6
+        = f.input :middle_name
+      .col-md-6
+        = f.input :gender, collection: ['Female', 'Male'], selected: f.object.gender, prompt: 'Please Select'
+    .row
+      .col-md-6
+        = f.input :occupation
+      .col-md-6
+        = f.input :grp_org_comp, label: 'Group / Organization / Company'
+    .row
+      .col-md-12
+        = f.input :residential_address
+    .row
+      .col-md-6
+        = f.input :birth_date, wrapper: :inline_multi_select, start_year: Date.current.year, end_year: 1950, prompt: { day: 'Day', month: 'Month', year: 'Year' }
+      .col-md-6
+        = f.input :contact_numbers
+    .row
+      .col-md-6
+        = f.input :emergency_contact_name
+      .col-md-6
+        = f.input :emergency_contact_number
+    .row
+      .col-md-6
+        = f.input :singlet, collection: Registration::SINGLET, selected: f.object.singlet, prompt: 'Please Select', label: 'Singlet Size'
+    .row
+      .col-md-6
+        = f.input :is_paid_on_site, label: ' <b>Is paid on site?</b>'.html_safe
+    #payment-details *{style: (f.object.is_paid_on_site? ? 'display:none;' : nil )}
       .row
         .col-md-6
-          = f.input :email
-        .col-md-6
-          = f.input :category, collection: Registration.categories, selected: f.object.category, prompt: 'Please Select'
+          = f.input :bank_name, collection: ['BDO', 'BPI'], selected: f.object.bank_name, prompt: 'Please Select'
       .row
         .col-md-6
-          = f.input :first_name
-        .col-md-6
-          = f.input :last_name
-      .row
-        .col-md-6
-          = f.input :middle_name
-        .col-md-6
-          = f.input :gender, collection: ['Female', 'Male'], selected: f.object.category, prompt: 'Please Select'
-      .row
-        .col-md-6
-          = f.input :occupation
-        .col-md-6
-          = f.input :grp_org_comp, label: 'Group / Organization / Company'
-      .row
-        .col-md-12
-          = f.input :residential_address
-      .row
-        .col-md-6
-          = f.input :birth_date, wrapper: :inline_multi_select, start_year: Date.current.year, end_year: 1950, prompt: { day: 'Day', month: 'Month', year: 'Year' }
-        .col-md-6
-          = f.input :contact_numbers
-      .row
-        .col-md-6
-          = f.input :emergency_contact_name
-        .col-md-6
-          = f.input :emergency_contact_number
-      .row
-        .col-md-6
-          = f.input :singlet, collection: Registration::SINGLET, selected: f.object.singlet, prompt: 'Please Select', label: 'Singlet Size'
-      .row
-        .col-md-8
-          = f.input :attachment, label: 'Attach Deposit Slip'
-      .row
-        .col-md-12
-          = f.input :terms_accepted, label: ' I have read the <b>RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK, AND INDEMNITY AGREEMENT</b>'.html_safe
-      .form-actions
-        .row-fluid
-          .text-right
-            = f.button :submit, class: 'btn btn-primary', value: 'Register', data: {disable_with: 'Saving....'}
-            = link_to 'Cancel', url_for(controller: controller_name, action: 'index'), class: 'btn btn-default', style: 'margin-left: 5px;'
+          - if !f.object.is_paid_on_site? && f.object.attachment.present?
+            label Deposit Slip
+            br
+            = link_to f.object.attachment.url(:large), data: {toggle: 'lightbox', title: 'Deposit Slip'}  do
+              = image_tag(f.object.attachment.url(:thumb), class: 'img-responsive img-thumbnail')
+          - else
+            = f.input :attachment, label: 'Attach Deposit Slip'
+    .row
+      .col-md-6
+        = f.input :is_free_registraion, label: ' <b>Is free registration?</b>'.html_safe
+    .form-actions
+      .row-fluid
+        .text-right
+          = f.button :submit, class: 'btn btn-primary', data: {disable_with: 'Saving....'}
+          = link_to 'Cancel', url_for(controller: controller_name, action: 'index'), class: 'btn btn-default', style: 'margin-left: 5px;'
 
 
 

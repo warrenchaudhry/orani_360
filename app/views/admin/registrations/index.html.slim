@@ -1,1 +1,44 @@
-= render 'shared/collection_listing', collection: @registrations, view: true
+.row
+  .col-lg-12
+    = add_new_resource_link
+    .clearfix
+    br
+    .panel.panel-primary
+      .panel-heading
+        = "#{controller_name.humanize.titleize} Listing"
+      .panel-body
+        .row-fluid
+          == render 'filter_form'
+        br
+        .row-fluid
+          = page_entries_info @registrations, entry_name: 'registration'
+          .table-responsive
+            - if @registrations.any?
+              table.table.table-striped.table-bordered
+                thead
+                  tr
+                    - @registrations.display_attributes.each do |attr|
+                      th = formalize_header(attr)
+                    th.no-sort Actions
+
+                tbody
+                  - @registrations.each do |res|
+                    tr
+                      - @registrations.display_attributes.each do |attr|
+                        td = prettify_value(res, attr)
+                      td
+                        .btn-group role="group"
+                          = link_to url_for(controller: controller_name, action: 'show', id: res.id), class: 'btn btn-sm btn-default', title: 'View' do
+                            | View&nbsp;
+                            = content_tag(:i, nil, class: 'fa fa-eye')
+                          = link_to url_for(controller: controller_name, action: 'edit', id: res.id), class: 'btn btn-sm btn-default', title: 'Edit' do
+                            | Edit&nbsp;
+                            = content_tag(:i, nil, class: 'fa fa-pencil')
+                          = link_to url_for(controller: controller_name, action: 'destroy', id: res.id), class: 'btn btn-sm btn-default', data: {method: 'delete', confirm: 'Are you sure you want to delete this record?'},  title: 'Delete' do
+                            | Delete&nbsp;
+                            = content_tag(:i, nil, class: 'fa fa-times')
+
+              = paginate @registrations
+            - else
+              hr
+              p.lead No records yet

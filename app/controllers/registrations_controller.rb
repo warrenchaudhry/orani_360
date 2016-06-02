@@ -25,7 +25,7 @@ class RegistrationsController < ApplicationController
   # POST /registrations.json
   def create
     @registration = Registration.new(registration_params)
-
+    @registration.date_registered = Date.current
     respond_to do |format|
       if @registration.save
         format.html { redirect_to root_path, notice: 'Registration was successfully created.' }
@@ -72,6 +72,6 @@ class RegistrationsController < ApplicationController
       params.require(:registration).permit(:registration_no, :email, :first_name, :last_name, :middle_name, :occupation, :grp_org_comp,
                                            :residential_address, :gender, :birth_date, :contact_numbers, :emergency_contact_name,
                                            :emergency_contact_number, :category, :singlet, :terms_accepted, :receive_newsletters, :approved,
-                                           :attachment )
+                                           :attachment, :bank_name, :admin_encoded, :attachment_cache )
     end
 end

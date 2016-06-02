@@ -15,6 +15,7 @@ gem 'puma'
 gem 'foreman'
 gem 'aws-s3', '~> 0.6.3'
 gem 'aws-sdk', '~> 1.36.1'
+gem 'postmark-rails', '~> 0.12.0'
 
 
 
@@ -36,6 +37,7 @@ gem 'country_select', '~> 2.2.0'
 gem 'bootstrap-datepicker-rails'
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'simple_form_fancy_uploads'
+gem 'kaminari'
 
 
 # Code dependencies

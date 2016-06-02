@@ -8,6 +8,11 @@ $(document).on('ready page:load', function () {
     }
 
     $('#table-listing').dataTable();
+
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
 });
 
 
@@ -46,4 +51,19 @@ $(function() {
       commit: 'Continue',
       cancel: 'Cancel'
     });
+
+    $(document).on('change', '#registration_is_paid_on_site', function(){
+        if ($(this).is(':checked')){
+            $('#payment-details').fadeOut('slow');
+            reset( $('#registration_bank_name') );
+            reset( $('#registration_attachment') );
+        }else{
+            $('#payment-details').fadeIn('slow');
+        }
+    })
+
+    window.reset = function (e) {
+        e.wrap('<form>').closest('form').get(0).reset();
+        e.unwrap();
+    }
 });
