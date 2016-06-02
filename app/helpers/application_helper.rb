@@ -25,10 +25,16 @@ module ApplicationHelper
       dt = obj.send(attr)
 
       val = "#{time_ago_in_words(obj.send(attr))} ago" rescue nil
+    elsif obj.class.column_names.include?(attr) && obj.column_for_attribute(attr).type == :date
+      dt = obj.send(attr)
+
+      val = dt.to_s(:long) rescue nil
     elsif obj.class.column_names.include?(attr) && obj.column_for_attribute(attr).type == :boolean
       val = obj.send(attr) ? 'Yes' : 'No'
     elsif attr == 'mi'
       val = "#{obj.send(attr)}."
+    elsif attr == 'email'
+      val = mail_to obj.send(attr)
     else
       val = obj.send(attr)
     end

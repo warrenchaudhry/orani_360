@@ -1,0 +1,15 @@
+p New Registration has been made
+br
+table
+ tbody
+  - Registration.details_attributes.drop(1).each do |attr|
+    tr
+      td = Registration.human_attribute_name(attr)
+      td = prettify_value(@registration, attr)
+  - unless attachments.blank?
+    tr
+      td Bank Name
+      td = @registration.bank_name
+    tr
+      td Deposit Slip
+      td = image_tag(attachments[@registration.attachment_file_name].url, alt: 'TransferHealth')

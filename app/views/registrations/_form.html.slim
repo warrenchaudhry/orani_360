@@ -9,7 +9,7 @@
             .panel-body
               .row
                 .col-md-6
-                  = f.input :email
+                  = f.input :email, required: true
                 .col-md-6
                   = f.input :category, collection: Registration.categories, selected: f.object.category, prompt: 'Please Select'
               .row
@@ -21,7 +21,7 @@
                 .col-md-6
                   = f.input :middle_name
                 .col-md-6
-                  = f.input :gender, collection: ['Female', 'Male'], selected: f.object.category, prompt: 'Please Select'
+                  = f.input :gender, collection: ['Female', 'Male'], selected: f.object.gender, prompt: 'Please Select'
               .row
                 .col-md-6
                   = f.input :occupation
@@ -29,28 +29,28 @@
                   = f.input :grp_org_comp, label: 'Group / Organization / Company'
               .row
                 .col-md-12
-                  = f.input :residential_address
+                  = f.input :residential_address, required: true
               .row
                 .col-md-6
-                  = f.input :birth_date, wrapper: :inline_multi_select, start_year: Date.current.year, end_year: 1950, prompt: { day: 'Day', month: 'Month', year: 'Year' }
+                  = f.input :birth_date, wrapper: :inline_multi_select, start_year: Date.current.year, end_year: 1950, prompt: { day: 'Day', month: 'Month', year: 'Year' }, required: true
                 .col-md-6
-                  = f.input :contact_numbers
+                  = f.input :contact_numbers, required: true
               .row
                 .col-md-6
-                  = f.input :emergency_contact_name
+                  = f.input :emergency_contact_name, required: true
                 .col-md-6
-                  = f.input :emergency_contact_number
+                  = f.input :emergency_contact_number, required: true
               .row
                 .col-md-6
                   = f.input :singlet, collection: Registration::SINGLET, selected: f.object.singlet, prompt: 'Please Select', label: 'Singlet Size'
                 .col-md-6
-                  = f.input :bank_name, collection: ['BDO', 'BPI'], selected: f.object.bank_name, prompt: 'Please Select'
+                  = f.input :bank_name, collection: ['BDO', 'BPI'], selected: f.object.bank_name, prompt: 'Please Select', required: true
               .row
                 .col-md-8
-                  = f.input :attachment, label: 'Attach Deposit Slip'
+                  = f.input :attachment, label: 'Attach Deposit Slip', required: true
               .row
                 .col-md-12
-                  = f.input :terms_accepted, label: ' I have read the <b><a href="#" data-toggle="modal" data-target="#termsModal">RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK, AND INDEMNITY AGREEMENT</a></b>'.html_safe
+                  = f.input :terms_accepted, label: ' I have read the <b><a href="#" data-toggle="modal" data-target="#termsModal">RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK, AND INDEMNITY AGREEMENT</a></b>'.html_safe, required: true
               .form-actions
                 .row-fluid
                   .text-right

@@ -9,6 +9,6 @@
   = f.input :role, collection: [['Admin', 'admin'], ['Editor', 'editor']], selected: f.object.role, prompt: 'Please Select'
   = f.input :password
   = f.input :password_confirmation
-
+= f.input :should_receive_email, label: ' <b>Should Receive Emails?</b>'.html_safe, wrapper: :users_field_boolean
 
 

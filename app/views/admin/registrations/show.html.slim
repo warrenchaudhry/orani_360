@@ -1,25 +1,36 @@
 p#notice = notice
 
-p
-  strong Registration no:
-  = @registration.registration_no
-p
-  strong Email:
-  = @registration.email
-p
-  strong First name:
-  = @registration.first_name
-p
-  strong Last name:
-  = @registration.last_name
-p
-  strong Middle name:
-  = @registration.middle_name
+.row
+  .col-lg-12
+    = generate_breadcrumbs
+    .panel.panel-primary
+      .panel-heading
+        = "Registration of #{@registration.full_name('display')}"
+      .panel-body
+        dl.dl-horizontal
+          - Registration.details_attributes.each do |attr|
+            dt = Registration.human_attribute_name(attr)
+            dd = prettify_value(@registration, attr)
+          - if @registration.bank_name.present?
+            dt Bank Name
+            dd = @registration.bank_name
+          - if @registration.attachment.present?
+            dt Deposit Slip
+            dd = link_to @registration.attachment.url(:large), data: {toggle: 'lightbox', title: 'Deposit Slip'}  do
+                 = image_tag(@registration.attachment.url(:medium), class: 'img-responsive img-thumbnail')
+            dt Is Paid On-site?
+            dd = prettify_value(@registration, 'is_paid_on_site')
+            dt Is Free Registration
+            dd = prettify_value(@registration, 'is_free_registraion')
+            dt Amount
+            dd = number_to_currency @registration.amount, precision: 2, unit: 'P'
+            dt Approved
+            dd = prettify_value(@registration, 'approved')
+          - if @registration.approved? && @registration.approver.present?
+            dd Approved By
+            dt = @registration.approver.try(:full_name)
 
-p
-  strong Attachment:
-  = image_tag @registration.attachment.url(:medium)
 
-= link_to 'Edit', edit_admin_registration_path(@registration)
-'|
-= link_to 'Back', admin_registrations_path
+      = link_to 'Edit', edit_admin_registration_path(@registration)
+      '|
+      = link_to 'Back', admin_registrations_path

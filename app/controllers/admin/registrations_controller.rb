@@ -10,7 +10,7 @@ class Admin::RegistrationsController < Admin::BaseController
   def index
     params[:page] ||= 1
     params[:per] ||= 25
-    registrations = Registration.active
+    registrations = Registration.active.order('date_registered')
     if params[:q].present?
       keyword = params[:q].strip.downcase
       registrations = registrations.where('TRIM(LOWER(first_name)) LIKE ? OR TRIM(LOWER(middle_name)) LIKE ? OR TRIM(LOWER(last_name)) LIKE ?', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
@@ -66,11 +66,12 @@ class Admin::RegistrationsController < Admin::BaseController
   end
 
   def destroy
-    @registration.destroy
+    @registration.update_attributes(active: false)
     respond_to do |format|
-      format.html { redirect_to admin_registrations_path, notice: 'Page was successfully destroyed.' }
+      format.html { redirect_to admin_registrations_path, notice: 'Registration was successfully deleted.' }
       format.json { head :no_content }
     end
+
   end
 
   private
@@ -90,6 +91,6 @@ class Admin::RegistrationsController < Admin::BaseController
       params.require(:registration).permit(:registration_no, :email, :first_name, :last_name, :middle_name, :occupation, :grp_org_comp,
                                            :residential_address, :gender, :birth_date, :contact_numbers, :emergency_contact_name,
                                            :emergency_contact_number, :category, :singlet, :terms_accepted, :receive_newsletters, :approved,
-                                           :attachment, :date_registered, :admin_encoded, :is_paid_on_site, :bank_name, :is_free_registraion, :discount )
+                                           :attachment, :date_registered, :admin_encoded, :is_paid_on_site, :bank_name, :is_free_registraion, :discount, :remarks)
     end
 end

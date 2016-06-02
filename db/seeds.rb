@@ -5,9 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-admin = User.find_by_email('admin@email.com')
+admin = User.find_by_email('inboxbizsolutions@gmail.com')
 unless admin
-admin = User.new(email: 'admin@email.com', first_name: 'Inbox', mi: 'B', last_name: 'User', password: 'secret123$', password_confirmation: 'secret123$', gender: 'Male', birthdate: '1983-07-01', role: 'admin')
+admin = User.new(email: 'inboxbizsolutions@gmail.com', first_name: 'Inbox', mi: 'B', last_name: 'User', password: 'secret123$', password_confirmation: 'secret123$', gender: 'Male', birthdate: '1983-07-01', role: 'admin', should_receive_email: true)
 admin.save
 end
 

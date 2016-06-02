@@ -9,10 +9,6 @@ $(document).on('ready page:load', function () {
 
     $('#table-listing').dataTable();
 
-    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
-        event.preventDefault();
-        $(this).ekkoLightbox();
-    });
 });
 
 
@@ -61,6 +57,11 @@ $(function() {
             $('#payment-details').fadeIn('slow');
         }
     })
+
+    $('*[data-toggle="lightbox"]').on('click', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
 
     window.reset = function (e) {
         e.wrap('<form>').closest('form').get(0).reset();

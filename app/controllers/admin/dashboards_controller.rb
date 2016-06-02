@@ -2,6 +2,7 @@ class Admin::DashboardsController < Admin::BaseController
 
   def index
     @page_title = 'Dashboard'
+    @registrations = Registration.active
   end
 
   def results

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160523154952) do
+ActiveRecord::Schema.define(version: 20160602060813) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20160523154952) do
     t.boolean  "is_free_registraion",                              default: false
     t.decimal  "discount",                 precision: 8, scale: 2, default: 0.0
     t.decimal  "amount",                   precision: 8, scale: 2, default: 0.0
+    t.text     "remarks"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -161,7 +162,7 @@ ActiveRecord::Schema.define(version: 20160523154952) do
   add_index "roles", ["name"], name: "index_roles_on_name"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                                          null: false
+    t.string   "email",                                           null: false
     t.string   "crypted_password"
     t.string   "salt"
     t.string   "first_name"
@@ -183,6 +184,7 @@ ActiveRecord::Schema.define(version: 20160523154952) do
     t.datetime "last_activity_at"
     t.string   "last_login_from_ip_address"
     t.boolean  "active",                          default: true
+    t.boolean  "should_receive_email",            default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, if: -> { new_record? || changes["password"] }
 
   after_create :set_role
-
   def to_s
     full_name
   end
@@ -28,7 +27,7 @@ class User < ActiveRecord::Base
       [:first_name, :mi, :last_name, :suffix].each do |attr|
         if send(attr).present?
           if attr == :mi
-            name << "#{attr}."
+            name << "#{send(attr)}."
           else
             name << send(attr)
           end
@@ -74,6 +73,10 @@ class User < ActiveRecord::Base
 
     def categories
       CATEGORIES.collect {|reg| [ "#{reg[:name]} (P#{reg[:price]})", reg[:name] ]  }
+    end
+
+    def mail_recipients
+      where(should_receive_email: true).pluck(:email)
     end
 
   end
