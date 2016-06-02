@@ -38,7 +38,8 @@ module InboxCms
   			:bucket            => ENV['S3_BUCKET_NAME'],
   			:access_key_id     => ENV['AWS_ACCESS_KEY_ID'],
   			:secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
-  		}
+  		},
+  		:s3_protocol => :https
   	}
   	config.action_mailer.delivery_method = :postmark
     config.action_mailer.postmark_settings = { :api_token => ENV['POSTMARK_API_TOKEN'] }

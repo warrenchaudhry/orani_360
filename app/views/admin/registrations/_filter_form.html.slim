@@ -1,10 +1,9 @@
 = form_tag(admin_registrations_path, {method: :get, class: 'form-inline', role: 'form'}) do
   .form-group
     = label_tag :q, 'Keyword &nbsp;'.html_safe
-    = text_field_tag :q, params[:q], class: 'form-control'
+    = text_field_tag :q, params[:q], class: 'form-control', style: 'margin-right:5px;'
   .form-group
     = label_tag :cat, 'Category &nbsp;'.html_safe
-    = select_tag :cat, options_for_select(Registration.categories, selected: params[:cat]), include_blank: true, class: 'form-control'
-  button type="submit" class="btn btn-primary" Search
-  span style="margin-left: 5px;"
-    = link_to 'Clear', admin_registrations_path, class: 'btn btn-default'
+    = select_tag :cat, options_for_select(Registration.categories, selected: params[:cat]), include_blank: true, class: 'form-control', style: 'margin-right:5px;'
+  button type="submit" class="btn btn-primary" style="margin-right:5px;" Search
+  = link_to 'Clear', admin_registrations_path, class: 'btn btn-default'
