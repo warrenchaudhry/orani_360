@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 8 }, if: -> { new_record? || changes["password"] }
   validates :password, confirmation: true, if: -> { new_record? || changes["password"] }
   validates :password_confirmation, presence: true, if: -> { new_record? || changes["password"] }
-  validates_date :birth_date, on_or_before: lambda { Date.current }, allow_blank: true
+  validates_date :birthdate, on_or_before: lambda { Date.current }, allow_blank: true
 
   after_create :set_role
   def to_s
