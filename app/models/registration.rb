@@ -68,7 +68,7 @@ class Registration < ActiveRecord::Base
 
   def assign_defaults
     self.age = Toolbox.age(birth_date) if birth_date.present?
-    self.age_on_race_day = Toolbox.age(birth_date, '2016-08-14'.to_date)
+    self.age_on_race_day = Toolbox.age(birth_date, '2016-08-14'.to_date) if birth_date.present?
     self.terms_accepted_at = Time.zone.now if terms_accepted?
     self.amount = assign_registration_amount
   end
