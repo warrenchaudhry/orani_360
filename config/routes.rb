@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     get 'login' => 'sessions#new', :as => :login
     delete 'logout' => 'sessions#destroy', :as => :logout
   end
-  resources :registrations
+  resources :registrations, only: [:new, :show, :create]
   get '/(:page_url)', to: 'main#pages', constraints: UrlConstraint.new
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

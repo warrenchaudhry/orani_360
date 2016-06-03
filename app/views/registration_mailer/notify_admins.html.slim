@@ -10,6 +10,10 @@ table
     tr
       td Bank Name
       td = @registration.bank_name
-    tr
-      td Deposit Slip
-      td = image_tag(attachments[@registration.attachment_file_name].url, alt: 'TransferHealth')
+
+br
+p Visit this <a href="#{admin_registration_url(@registration.id)}">link</a> to view more about this registration.
+
+/tr
+/  td Deposit Slip
+/  td = image_tag(attachments[@registration.attachment_file_name].url, alt: 'TransferHealth')
