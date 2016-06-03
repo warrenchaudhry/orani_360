@@ -28,7 +28,7 @@ class RegistrationsController < ApplicationController
     @registration.date_registered = Date.current
     respond_to do |format|
       if @registration.save
-        format.html { redirect_to root_path, notice: 'Registration was successfully created.' }
+        format.html { redirect_to registration_path(@registration) }
         format.json { render :show, status: :created, location: @registration }
       else
         format.html { render :new }
