@@ -1,0 +1,51 @@
+.row
+  .col-lg-12
+    h1.page-header Contact Us
+/! map here
+.row
+  .col-md-8
+    iframe width="100%" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed/v1/place?q=Orani,+Bataan,+Central+Luzon,+Philippines&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU"
+
+  .col-md-4
+    h3 Contact Details
+    p Orani Bataan<br>Philippines, 2112
+    p
+      i.fa.fa-phone
+      abbr title="Phone" &nbsp;P
+      | &nbsp;: (123) 456-7890
+    p
+      i.fa.fa-envelope-o
+      abbr title="Email" &nbsp;E
+      | &nbsp;:&nbsp;
+      = mail_to 'name@example.com'
+    p
+      i.fa.fa-clock-o
+      abbr title="Hours" H
+      | &nbsp;:&nbsp;Monday - Friday: 9:00 AM to 5:00 PM
+    ul.list-unstyled.list-inline.list-social-icons
+      li
+        a href="https://www.facebook.com/orani360halfmarathon/?fref=ts" target="_blank"
+          i.fa.fa-facebook-square.fa-2x
+/! contact form here
+.row
+  .col-md-8
+    h3 Get in touch with us
+    hr
+    form#contactForm name="sentMessage" novalidate=""
+      .control-group.form-group
+        .controls
+          label Full Name:
+          input#name.form-control type="text"
+      .control-group.form-group
+        .controls
+          label Phone Number:
+          input#phone.form-control type="tel"
+      .control-group.form-group
+        .controls
+          label Email Address:
+          input#email.form-control type="email"
+      .control-group.form-group
+        .controls
+          label Message:
+          textarea#message.form-control type="email" rows="10" cols="100" maxlength="999" style="resize:none;"
+      button type="submit" class="btn btn-primary" Send Message

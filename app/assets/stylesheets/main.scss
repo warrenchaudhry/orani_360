@@ -2,6 +2,7 @@
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "dataTables/dataTables.bootstrap";
 
 $bgDefault      : #4f6fea;
 $bgHighlight    : #0a3aac;
@@ -24,10 +25,15 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-default {
   background-color: $bgDefault;
   border-color: $bgHighlight;
+  .top-nav {
+    font-size: 14px;
+  }
   .navbar-brand {
     color: $colDefault;
     &:hover, &:focus {
-      color: $colHighlight; }}
+      color: $colHighlight;
+    }
+  }
   .navbar-text {
     color: $colDefault; }
   .navbar-nav {
@@ -85,13 +91,13 @@ h1, h2, h3, h4, h5, h6 {
         background-color: $bgHighlight; }}}
 }
 
-.navbar-fixed-top .nav {
-    padding: 15px 0;
-}
+//.navbar-fixed-top .nav {
+//    padding: 15px 0;
+//}
 
-.navbar-fixed-top .navbar-brand {
-    padding: 0 15px;
-}
+//.navbar-fixed-top .navbar-brand {
+//    padding: 0 15px;
+//}
 
 footer {
     padding: 30px 0;
@@ -208,3 +214,52 @@ table.registration-details {
     color: #000 !important;
   }
 }
+.cat-21k {
+  background:#071d9d !important;
+}
+.cat-10k {
+  background:#fb021a !important;
+}
+.cat-5k {
+  background:#289a33 !important;
+}
+.cat-3k {
+  background:#ff6225 !important;
+}
+
+//datatables related styles
+.dataTables_wrapper {
+    position: relative;
+    clear: both;
+}
+
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_asc,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_asc_disabled,
+table.dataTable thead .sorting_desc_disabled {
+    background: 0 0;
+}
+
+table.dataTable thead .sorting_asc:after {
+    content: "\f0de";
+    float: right;
+    font-family: fontawesome;
+}
+
+table.dataTable thead .sorting_desc:after {
+    content: "\f0dd";
+    float: right;
+    font-family: fontawesome;
+}
+
+table.dataTable thead .sorting:after {
+    content: "\f0dc";
+    float: right;
+    font-family: fontawesome;
+    color: rgba(50,50,50,.5);
+}
+
+.no-sort::after { display: none!important; }
+
+.no-sort { pointer-events: none!important; cursor: default!important; }

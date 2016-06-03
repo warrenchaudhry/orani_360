@@ -4,6 +4,8 @@
 //= require bootstrap-sprockets
 //= require jquery_nested_form
 //= require data-confirm-modal
+//= require dataTables/jquery.dataTables
+//= require dataTables/dataTables.bootstrap
 //= require jquery.countdown
 
 $(document).on("page:load ready", function(){
@@ -21,8 +23,10 @@ $(document).on("page:load ready", function(){
       .parent().addClass('disabled');
     });
     
-    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+    $('*[data-toggle="lightbox"]').on('click', function(event) {
         event.preventDefault();
         $(this).ekkoLightbox();
     });
+
+    $('.table-listing').dataTable();
 });

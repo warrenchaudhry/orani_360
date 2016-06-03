@@ -1,22 +1,17 @@
-p#notice = notice
+.row-fluid
+  .text-center
+    = image_tag('orani-360-banner.jpg', class: 'img-responsive img-rounded')
+    h3
+      em August 14, 2016 | Orani Plaza
+br
 
-p.lead Your registration has been processed successfully. You will receive an email from the administrator shortly.
-p
-  strong Registration no:
-  = @registration.registration_no
-p
-  strong Email:
-  = @registration.email
-p
-  strong First name:
-  = @registration.first_name
-p
-  strong Last name:
-  = @registration.last_name
-p
-  strong Middle name:
-  = @registration.middle_name
+.row
+  .col-lg-12
+    .panel.panel-primary
+      .panel-heading
+        | Success!
+      .panel-body
+        p.lead Thank you for joining <b>Orani 360 - Half Marathon.</b> Your registration has been submitted and you will receive an email from one of the administrators shortly.
 
-= link_to 'Edit', edit_registration_path(@registration)
-'|
-= link_to 'Back', registrations_path
+        = link_to 'Back to Home', root_path, class: 'btn btn-primary'
+

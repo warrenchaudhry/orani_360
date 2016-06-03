@@ -15,6 +15,8 @@ html
     = csrf_meta_tags
     /[if IE]
       script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"
+    == yield(:page_styles)
+    == yield(:page_scripts)
   body
     = render 'shared/front/top_nav'
 

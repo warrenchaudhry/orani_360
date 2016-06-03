@@ -1,0 +1,37 @@
+hr
+.col-lg-12
+  ul#myTab.nav.nav-tabs.nav-justified
+    li.active
+      a href="#cat-3k" data-toggle="tab" aria-expanded="true"
+        strong 3K
+    li
+      a href="#cat-5k" data-toggle="tab" aria-expanded="false"
+        strong 5K
+    li
+      a href="#cat-10k" data-toggle="tab" aria-expanded="false"
+        strong 10K
+    li
+      a href="#cat-21k" data-toggle="tab" aria-expanded="false"
+        strong 21K
+
+    #myTabContent.tab-content
+      #cat-3k.tab-pane.fade.active.in style="padding: 10px;"
+        h4 3K Participants
+        hr
+        == render 'main/pages/runners_listing', start_id: 1, end_id: 100
+
+      #cat-5k.tab-pane.fade style="padding: 10px;"
+        h4 5K Participants
+        hr
+        == render 'main/pages/runners_listing', start_id: 101, end_id: 220
+
+      #cat-10k.tab-pane.fade style="padding: 10px;"
+        h4 10K Participants
+        hr
+        == render 'main/pages/runners_listing', start_id: 221, end_id: 310
+
+      #cat-21k.tab-pane.fade style="padding: 10px;"
+        h4 21K Participants
+        hr
+        == render 'main/pages/runners_listing', start_id: 310, end_id: 450
+
