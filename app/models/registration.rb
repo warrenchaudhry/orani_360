@@ -3,7 +3,7 @@ class Registration < ActiveRecord::Base
   CATEGORIES = [
     {name: '3K', price: 250},
     {name: '5K', price: 300},
-    {name: '15K', price: 450},
+    {name: '10K', price: 450},
     {name: '21K', price: 700}
   ]
   SINGLET = %w(XS SM MD LG XL XXL)
