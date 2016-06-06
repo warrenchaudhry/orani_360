@@ -3,10 +3,11 @@ class Registration < ActiveRecord::Base
   CATEGORIES = [
     {name: '3K', price: 250},
     {name: '5K', price: 300},
-    {name: '15K', price: 450},
+    {name: '10K', price: 450},
     {name: '21K', price: 700}
   ]
   SINGLET = %w(XS SM MD LG XL XXL)
+  STATUS = %w(Approved Pending Rejected)
   # has_many :deposit_attachments,  dependent: :destroy
   # accepts_nested_attributes_for :deposit_attachments, allow_destroy: true, :reject_if => :all_blank
   EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
@@ -15,7 +16,8 @@ class Registration < ActiveRecord::Base
   validates :email, :residential_address, :birth_date, :contact_numbers,
            :emergency_contact_name, :emergency_contact_number, :bank_name, presence: true, unless: 'is_paid_on_site?'
   validates :registration_no, :date_registered, presence: true, if: 'admin_encoded?'
-  validates :email, uniqueness: { case_sensitive: false }, format: EMAIL_REGEX, allow_blank: true
+  validates :registration_no, uniqueness: true, allow_blank: true
+  validates :email, format: EMAIL_REGEX, allow_blank: true
   validates_date :birth_date, on_or_before: lambda { Date.current }, allow_blank: true
   validate :check_if_terms_accepted, on: :create, unless: 'admin_encoded.present?'
   has_attached_file :attachment, :styles => {
@@ -29,6 +31,9 @@ class Registration < ActiveRecord::Base
   :default_url => "/assets/no-image.png",
   :default_style => :thumb
 
+  STATUS.each do |s|
+    scope s.downcase.to_sym, -> { where(status: s.downcase) }
+  end
   scope :active, -> {where(active: true)}
   validates_attachment_presence :attachment, unless: 'is_paid_on_site?'
   validates_attachment_content_type :attachment, :content_type => /\Aimage\/.*\Z/
@@ -45,7 +50,7 @@ class Registration < ActiveRecord::Base
   class << self
 
     def display_attributes
-      %w{registration_no display_name category gender approved paid_online updated_at}
+      %w{registration_no display_name category gender status paid_online updated_at}
     end
 
     def categories
@@ -53,7 +58,7 @@ class Registration < ActiveRecord::Base
     end
 
     def details_attributes
-      ["registration_no", "category", "singlet", "email", "first_name", "last_name", "middle_name", "gender", "date_registered", "birth_date", "age", "age_on_race_day", "occupation", "grp_org_comp", "residential_address", "contact_numbers", "emergency_contact_name", "emergency_contact_number"]
+      ["registration_no", "category", "singlet", "email", "last_name", "first_name", "middle_name", "gender", "date_registered", "birth_date", "age", "age_on_race_day", "occupation", "grp_org_comp", "residential_address", "contact_numbers", "emergency_contact_name", "emergency_contact_number"]
     end
 
     def human_attribute_name(attr, options={})
@@ -137,6 +142,16 @@ class Registration < ActiveRecord::Base
 
   def notify_admins
     RegistrationMailer.notify_admins(self).deliver_now
+  end
+
+  def approve
+    self.approved = true
+    self.approved_at = Time.zone.now
+    self.status = 'approved'
+  end
+
+  def reviewed?
+    approved? || rejected?
   end
 
   private

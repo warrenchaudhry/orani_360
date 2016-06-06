@@ -20,5 +20,7 @@
 //= require data-confirm-modal
 //= require dataTables/jquery.dataTables
 //= require dataTables/dataTables.bootstrap
+//= require nprogress
+//= require nprogress-turbolinks
 //= require core
 //= require basepath

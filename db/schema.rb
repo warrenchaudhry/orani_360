@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602060813) do
+ActiveRecord::Schema.define(version: 20160606061052) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -148,6 +148,23 @@ ActiveRecord::Schema.define(version: 20160602060813) do
     t.decimal  "discount",                 precision: 8, scale: 2, default: 0.0
     t.decimal  "amount",                   precision: 8, scale: 2, default: 0.0
     t.text     "remarks"
+    t.boolean  "rejected",                                         default: false
+    t.string   "status"
+  end
+
+  add_index "registrations", ["first_name"], name: "index_registrations_on_first_name"
+  add_index "registrations", ["last_name"], name: "index_registrations_on_last_name"
+  add_index "registrations", ["registration_no"], name: "index_registrations_on_registration_no"
+
+  create_table "rejected_registations", force: :cascade do |t|
+    t.integer  "registration_id"
+    t.text     "reason"
+    t.integer  "rejected_by"
+    t.datetime "rejected_at"
+    t.boolean  "sent",            default: false
+    t.datetime "sent_at"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "roles", force: :cascade do |t|

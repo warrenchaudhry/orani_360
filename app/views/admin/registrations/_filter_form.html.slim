@@ -5,5 +5,11 @@
   .form-group
     = label_tag :cat, 'Category &nbsp;'.html_safe
     = select_tag :cat, options_for_select(Registration.categories, selected: params[:cat]), include_blank: true, class: 'form-control', style: 'margin-right:5px;'
+  .form-group
+    = label_tag :s, 'Status &nbsp;'.html_safe
+    = select_tag :s, options_for_select(Registration::STATUS.map {|s| [s, s.downcase]}, selected: params[:s]), include_blank: true, class: 'form-control', style: 'margin-right:5px;'
+  .form-group
+    = label_tag :singlet, 'Singlet &nbsp;'.html_safe
+    = select_tag :singlet, options_for_select(Registration::SINGLET, selected: params[:singlet]), include_blank: true, class: 'form-control', style: 'margin-right:5px;'
   button type="submit" class="btn btn-primary" style="margin-right:5px;" Search
   = link_to 'Clear', admin_registrations_path, class: 'btn btn-default'

@@ -13,12 +13,18 @@ class Admin::RegistrationsController < Admin::BaseController
     registrations = Registration.active.order('date_registered')
     if params[:q].present?
       keyword = params[:q].strip.downcase
-      registrations = registrations.where('TRIM(LOWER(first_name)) LIKE ? OR TRIM(LOWER(middle_name)) LIKE ? OR TRIM(LOWER(last_name)) LIKE ?', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+      registrations = registrations.where('TRIM(LOWER(first_name)) LIKE :keyword OR TRIM(LOWER(middle_name)) LIKE :keyword OR TRIM(LOWER(last_name)) LIKE :keyword OR registration_no LIKE :keyword', keyword: "%#{keyword}%")
     end
     if params[:cat].present?
       registrations = registrations.where(category: params[:cat])
     end
-    @registrations = registrations.order('first_name').page(params[:page]).per(params[:per])
+    if params[:s].present? && Registration::STATUS.include?(params[:s].capitalize)
+      registrations = registrations.send(params[:s].strip.downcase)
+    end
+    if params[:singlet].present? && Registration::SINGLET.include?(params[:singlet])
+      registrations = registrations.send(params[:singlet].strip.downcase)
+    end
+    @registrations = registrations.reorder('TRIM(last_name)').page(params[:page]).per(params[:per])
   end
 
   def new
@@ -39,8 +45,7 @@ class Admin::RegistrationsController < Admin::BaseController
   def create
     @registration = Registration.new(registration_params)
     @registration.admin_encoded = true
-    @registration.approved = true
-    @registration.approved_at = Time.zone.now
+    @registration.approve
     @registration.approved_by = current_user.id
     respond_to do |format|
       if @registration.save
@@ -73,6 +78,24 @@ class Admin::RegistrationsController < Admin::BaseController
     end
 
   end
+
+  def pre_approval
+
+  end
+
+  def approve
+
+  end
+
+  def pre_rejection
+
+  end
+
+  def reject
+
+  end
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
