@@ -1,0 +1,26 @@
+.row
+  .col-lg-12
+    = generate_breadcrumbs
+    .panel.panel-primary
+      .panel-heading
+        = "Approve Registration"
+      .panel-body
+        = simple_form_for @registration, url: admin_approve_registration_path(@registration), method: :put do |f|
+          = f.error_notification
+          .form-inputs
+            fieldset
+              .row
+                .col-md-12
+                  p.lead Please enter registration number to finalize approval of registration.
+                .col-md-6
+                  = f.input :registration_no, label: 'Registration No.'
+                  = f.input :for_approval, as: :hidden, input_html: {value: true}
+              .form-actions
+                .row-fluid
+                  .text-right
+                    = f.button :submit, class: 'btn btn-primary', data: {disable_with: 'Saving....'}
+                    = link_to 'Cancel', url_for(controller: controller_name, action: 'index'), class: 'btn btn-default', style: 'margin-left: 5px;'
+
+
+
+

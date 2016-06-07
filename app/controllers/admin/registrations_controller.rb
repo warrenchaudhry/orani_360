@@ -1,6 +1,6 @@
 class Admin::RegistrationsController < Admin::BaseController
-  before_action :set_registration, only: [:show, :edit, :update, :destroy]
-  before_action :check_role, only: [:approve, :destroy]
+  before_action :set_registration, only: [:show, :edit, :update, :destroy, :approve, :pre_approval, :reject, :pre_reject]
+  before_action :check_role, only: [:destroy]
 
   def set_page_title
     @page_title = "Registrations Management"
@@ -13,12 +13,18 @@ class Admin::RegistrationsController < Admin::BaseController
     registrations = Registration.active.order('date_registered')
     if params[:q].present?
       keyword = params[:q].strip.downcase
-      registrations = registrations.where('TRIM(LOWER(first_name)) LIKE ? OR TRIM(LOWER(middle_name)) LIKE ? OR TRIM(LOWER(last_name)) LIKE ?', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+      registrations = registrations.where('TRIM(LOWER(first_name)) LIKE :keyword OR TRIM(LOWER(middle_name)) LIKE :keyword OR TRIM(LOWER(last_name)) LIKE :keyword OR registration_no LIKE :keyword', keyword: "%#{keyword}%")
     end
     if params[:cat].present?
       registrations = registrations.where(category: params[:cat])
     end
-    @registrations = registrations.order('first_name').page(params[:page]).per(params[:per])
+    if params[:s].present? && Registration::STATUS.include?(params[:s].capitalize)
+      registrations = registrations.send(params[:s].strip.downcase)
+    end
+    if params[:singlet].present? && Registration::SINGLET.include?(params[:singlet])
+      registrations = registrations.where(singlet: params[:singlet])
+    end
+    @registrations = registrations.reorder('TRIM(last_name)').page(params[:page]).per(params[:per])
   end
 
   def new
@@ -39,8 +45,7 @@ class Admin::RegistrationsController < Admin::BaseController
   def create
     @registration = Registration.new(registration_params)
     @registration.admin_encoded = true
-    @registration.approved = true
-    @registration.approved_at = Time.zone.now
+    @registration.approve
     @registration.approved_by = current_user.id
     respond_to do |format|
       if @registration.save
@@ -74,6 +79,46 @@ class Admin::RegistrationsController < Admin::BaseController
 
   end
 
+  def pre_approval
+    @page_action = 'approve'
+  end
+
+  def approve
+    respond_to do |format|
+      @registration.approve
+      @registration.approved_by = current_user.id
+      if @registration.update(registration_params)
+        RegistrationMailer.approve(@registration).deliver
+        format.html { redirect_to admin_registration_path(@registration), notice: 'Registration has been approved.' }
+        format.json { render :show, status: :ok, location: @registration }
+      else
+        format.html { render :pre_approval }
+        format.json { render json: @registration.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def pre_reject
+    @page_action = 'reject'
+    @registration.build_rejected_registration
+  end
+
+  def reject
+    respond_to do |format|
+
+      @registration.reject(current_user)
+      if @registration.update(registration_params)
+        format.html { redirect_to admin_registration_path(@registration), notice: 'Registration has been rejected.' }
+        format.json { render :show, status: :ok, location: @registration }
+      else
+        format.html { render :pre_reject }
+        format.json { render json: @registration.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def check_role
@@ -91,6 +136,7 @@ class Admin::RegistrationsController < Admin::BaseController
       params.require(:registration).permit(:registration_no, :email, :first_name, :last_name, :middle_name, :occupation, :grp_org_comp,
                                            :residential_address, :gender, :birth_date, :contact_numbers, :emergency_contact_name,
                                            :emergency_contact_number, :category, :singlet, :terms_accepted, :receive_newsletters, :approved,
-                                           :attachment, :date_registered, :admin_encoded, :is_paid_on_site, :bank_name, :is_free_registraion, :discount, :remarks)
+                                           :attachment, :date_registered, :admin_encoded, :is_paid_on_site, :bank_name, :is_free_registraion,
+                                           :discount, :remarks, rejected_registration_attributes: [:reason])
     end
 end

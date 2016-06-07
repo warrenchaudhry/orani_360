@@ -1,0 +1,26 @@
+.row
+  .col-lg-12
+    = generate_breadcrumbs
+    .panel.panel-primary
+      .panel-heading
+        = "Approve Registration"
+      .panel-body
+        = simple_form_for @registration, url: admin_reject_registration_path(@registration), method: :put do |f|
+          = f.error_notification
+          .form-inputs
+            fieldset
+              .row
+                .col-md-12
+                  p.lead Please specify the reason why this registration has been disapproved.
+                .col-md-6
+                  = f.simple_fields_for :rejected_registration, @registration.rejected_registration do |ff|
+                    = ff.input :reason
+              .form-actions
+                .row-fluid
+                  .text-right
+                    = f.button :submit, class: 'btn btn-primary', data: {disable_with: 'Saving....'}
+                    = link_to 'Cancel', url_for(controller: controller_name, action: 'index'), class: 'btn btn-default', style: 'margin-left: 5px;'
+
+
+
+

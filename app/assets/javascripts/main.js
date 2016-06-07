@@ -7,6 +7,8 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/dataTables.bootstrap
 //= require jquery.countdown
+//= require nprogress
+//= require nprogress-turbolinks
 
 $(document).on("page:load ready", function(){
   $('#clock').countdown('2016/08/14 04:30:00')
@@ -29,4 +31,10 @@ $(document).on("page:load ready", function(){
     });
 
     $('.table-listing').dataTable();
+
+    NProgress.configure({
+      showSpinner: false,
+      ease: 'ease',
+      speed: 500
+    });
 });

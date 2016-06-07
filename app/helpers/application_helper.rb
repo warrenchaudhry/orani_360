@@ -20,23 +20,19 @@ module ApplicationHelper
   end
 
   def prettify_value(obj, attr)
-
+    val = obj.send(attr)
     if obj.class.column_names.include?(attr) && obj.column_for_attribute(attr).type == :datetime
-      dt = obj.send(attr)
-
-      val = "#{time_ago_in_words(obj.send(attr))} ago" rescue nil
+      val = "#{time_ago_in_words(val)} ago" rescue nil
     elsif obj.class.column_names.include?(attr) && obj.column_for_attribute(attr).type == :date
-      dt = obj.send(attr)
-
-      val = dt.to_s(:long) rescue nil
+      val = val.to_s(:long) rescue nil
     elsif obj.class.column_names.include?(attr) && obj.column_for_attribute(attr).type == :boolean
-      val = obj.send(attr) ? 'Yes' : 'No'
+      val = val ? 'Yes' : 'No'
     elsif attr == 'mi'
-      val = "#{obj.send(attr)}."
+      val = "#{val}."
     elsif attr == 'email'
-      val = mail_to obj.send(attr)
-    else
-      val = obj.send(attr)
+      val = mail_to val
+    elsif attr == 'status'
+      val = val.capitalize
     end
     return '--' if val.blank?
     val
@@ -68,7 +64,7 @@ module ApplicationHelper
     html = '<ol class="breadcrumb">' +
             '<li><a href='"#{admin_dashboards_path}"'><span class="fa fa-home"></span> Dashboard</a></li>' +
             '<li><a href='"#{url_for(controller: controller_name, action: 'index')}"'>' + controller_name.humanize.titleize + '</a></li>' +
-            '<li class="active">' + action_name.capitalize + '</li>' +
+            '<li class="active">' + (@page_action.present? ? @page_action.capitalize : action_name.humanize.capitalize) + '</li>' +
             '</ol>'
 
     raw(html)

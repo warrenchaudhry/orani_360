@@ -1,0 +1,16 @@
+p Hi #{@registration.first_name},
+br
+
+p We are sorry to inform you that your registration for <b>Orani 360 - Half Marathon</b> on #{@registration.date_registered.to_s(:long)} has been disapproved for the following reason(s):
+br
+p
+  strong Reason:
+p #{raw(@registration.rejected_registration.reason)}
+br
+p If you have any questions, feel free to contacts us through blah blah blah
+
+br
+br
+p Best Regards,
+br
+  | Orani 360 - Half Marathon Support Team

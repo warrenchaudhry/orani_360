@@ -30,12 +30,13 @@
                       td style="width:220px;"
                         .btn-group role="group"
                           = link_to url_for(controller: controller_name, action: 'show', id: reg.id), class: 'btn btn-sm btn-default', title: 'View' do
-                            | View&nbsp;
+                            = reg.reviewed? ? 'View' : 'Review'
+                            | &nbsp;
                             = content_tag(:i, nil, class: 'fa fa-eye')
-                          = link_to url_for(controller: controller_name, action: 'edit', id: reg.id), class: 'btn btn-sm btn-default', title: 'Edit' do
+                          = link_to !reg.reviewed? ? 'javascript:void(0)' : url_for(controller: controller_name, action: 'edit', id: reg.id), class: 'btn btn-sm btn-default', title: 'Edit', disabled: !reg.reviewed? do
                             | Edit&nbsp;
                             = content_tag(:i, nil, class: 'fa fa-pencil')
-                          = link_to url_for(controller: controller_name, action: 'destroy', id: reg.id), class: 'btn btn-sm btn-default', data: {method: 'delete', confirm: 'Are you sure you want to delete this record?'},  title: 'Delete' do
+                          = link_to !reg.reviewed? ? 'javascript:void(0)' : url_for(controller: controller_name, action: 'destroy', id: reg.id), class: 'btn btn-sm btn-default', disabled: !reg.reviewed?,  title: 'Delete',  data: (reg.reviewed? ? {method: 'delete', confirm: 'Are you sure you want to delete this record?'} : nil) do
                             | Delete&nbsp;
                             = content_tag(:i, nil, class: 'fa fa-times')
 

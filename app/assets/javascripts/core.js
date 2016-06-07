@@ -8,6 +8,10 @@ $(document).on('ready page:load', function () {
     }
 
     $('#table-listing').dataTable();
+    $('*[data-toggle="lightbox"]').on('click', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
 
 });
 
@@ -16,6 +20,11 @@ $(document).on('ready page:load', function () {
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size
 $(function() {
+    NProgress.configure({
+      showSpinner: false,
+      ease: 'ease',
+      speed: 500
+    });
     $(window).bind("load resize", function() {
         topOffset = 50;
         width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
@@ -57,11 +66,6 @@ $(function() {
             $('#payment-details').fadeIn('slow');
         }
     })
-
-    $('*[data-toggle="lightbox"]').on('click', function(event) {
-        event.preventDefault();
-        $(this).ekkoLightbox();
-    });
 
     window.reset = function (e) {
         e.wrap('<form>').closest('form').get(0).reset();
