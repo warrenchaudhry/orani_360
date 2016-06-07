@@ -1,44 +1,48 @@
-div class="container"
-  h2.some-class style="text-align:center;"
-  	|Our Official Partners
-  
-  div.some-class style="text-align:center;"
-  	table
-  	   tbody
-	  	 td
-	  	 	tr
-		  	= link_to asset_url('1Bataan.png'), data: {toggle: 'lightbox', title: '1Bataan', gallery: 'Sponsors'}  do
-		          = image_tag('1Bataan.png', class: 'img-responsive img-thumbnail', style: 'height: 80px')
-		    tr
-		  	= link_to asset_url('bataan.png'), data: {toggle: 'lightbox', title: 'Bataan Provincial Government', gallery: 'Sponsors'}  do
-		          = image_tag('bataan.png', class: 'img-responsive img-thumbnail', style: 'height: 80px')
-	  	 	tr
-		  	= link_to asset_url('Orani.png'), data: {toggle: 'lightbox', title: 'Municipality of Orani', gallery: 'Sponsors'}  do
-		          = image_tag('Orani.png', class: 'img-responsive img-thumbnail', style: 'height: 80px')
-	  	 	tr
-		  	= link_to asset_url('OrunnersLogo.png'), data: {toggle: 'lightbox', title: 'Orani Runners', gallery: 'Sponsors'}  do
-		          = image_tag('OrunnersLogo.png', class: 'img-responsive img-thumbnail', style: 'height: 80px')
-		    tr
-		  	= link_to asset_url('inbox.png'), data: {toggle: 'lightbox', title: 'Inbox Business Solution', gallery: 'Sponsors'}  do
-		          = image_tag('inbox.png', class: 'img-responsive img-thumbnail', style: 'height: 80px')
-		    tr      
-		  	= link_to asset_url('HBM.jpg'), data: {toggle: 'lightbox', title: 'Heartbeat of the Mission', gallery: 'Sponsors'}  do
-		          = image_tag('HBM.jpg', class: 'img-responsive img-thumbnail', style: 'height: 80px')
-	        tr
-		  	= link_to asset_url('NB.png'), data: {toggle: 'lightbox', title: 'New Balance - Marquee Mall', gallery: 'Sponsors'}  do
-		          = image_tag('NB.png', class: 'img-responsive img-thumbnail', style: 'height: 80px')
-	        tr
-		  	= link_to asset_url('Wow.jpg'), data: {toggle: 'lightbox', title: 'Work Out Works - Dinalupihan', gallery: 'Sponsors'}  do
-		          = image_tag('Wow.jpg', class: 'img-responsive img-thumbnail', style: 'height: 80px')
-		    tr
-		  	= link_to asset_url('BPC Logo.jpg'), data: {toggle: 'lightbox', title: 'Barath PC - Orani', gallery: 'Sponsors'}  do
-		          = image_tag('BPC Logo.jpg', class: 'img-responsive img-thumbnail', style: 'height: 80px')
-		    tr
-		  	= link_to asset_url('Globe.jpg'), data: {toggle: 'lightbox', title: 'Globe Telecoms', gallery: 'Sponsors'}  do
-		          = image_tag('Globe.jpg', class: 'img-responsive img-thumbnail', style: 'height: 80px')
-		    tr
-		  	= link_to asset_url('ML.jpg'), data: {toggle: 'lightbox', title: 'MLhuillier', gallery: 'Sponsors'}  do
-		          = image_tag('ML.jpg', class: 'img-responsive img-thumbnail', style: 'height: 80px')
-		    tr
-		  	= link_to asset_url('Genesis_Logo.png'), data: {toggle: 'lightbox', title: 'Genesis Transport Service, Inc.', gallery: 'Sponsors'}  do
-		          = image_tag('Genesis_Logo.png', class: 'img-responsive img-thumbnail', style: 'height: 80px')
+.container
+  .col-lg-12
+    h2.page-header.text-center Our Official Partners
+    table#partners-table.table.table-responsive
+      tbody
+        tr
+          td
+            = link_to asset_url('partners/1Bataan.png'), data: {toggle: 'lightbox', title: '1Bataan', gallery: 'Sponsors'}  do
+              = image_tag('partners/1Bataan.png', class: 'img-responsive')
+          td
+            = link_to asset_url('partners/bataan.png'), data: {toggle: 'lightbox', title: 'Bataan Provincial Government', gallery: 'Sponsors'}  do
+              = image_tag('partners/bataan.png', class: 'img-responsive')
+          td
+            = link_to asset_url('partners/Orani.png'), data: {toggle: 'lightbox', title: 'Municipality of Orani', gallery: 'Sponsors'}  do
+              = image_tag('partners/Orani.png', class: 'img-responsive')
+          td
+            = link_to asset_url('partners/HBM.jpg'), data: {toggle: 'lightbox', title: 'Heartbeat of the Mission', gallery: 'Sponsors'} do
+              = image_tag('partners/HBM.jpg', class: 'img-responsive')
+          td
+            = link_to asset_url('partners/OrunnersLogo.png'), data: {toggle: 'lightbox', title: 'Orani Runners', gallery: 'Sponsors'} do
+              = image_tag('partners/OrunnersLogo.png', class: 'img-responsive')
+          td
+            = link_to asset_url('partners/BPC Logo.jpg'), data: {toggle: 'lightbox', title: 'Barath PC - Orani', gallery: 'Sponsors'} do
+              = image_tag('partners/BPC Logo.jpg', class: 'img-responsive')
+        tr
+          td
+            = link_to asset_url('partners/NB.png'), data: {toggle: 'lightbox', title: 'New Balance - Marquee Mall', gallery: 'Sponsors'} do
+              = image_tag('partners/NB.png', class: 'img-responsive')
+          td
+            = link_to asset_url('partners/Wow.jpg'), data: {toggle: 'lightbox', title: 'Work Out Works - Dinalupihan', gallery: 'Sponsors'} do
+              = image_tag('partners/Wow.jpg', class: 'img-responsive')
+
+          td
+            = link_to asset_url('partners/inbox.png'), data: {toggle: 'lightbox', title: 'Inbox Business Solution', gallery: 'Sponsors'} do
+              = image_tag('partners/inbox.png', class: 'img-responsive')
+          td
+            = link_to asset_url('partners/Genesis_Logo.png'), data: {toggle: 'lightbox', title: 'Genesis Transport Service, Inc.', gallery: 'Sponsors'} do
+              = image_tag('partners/Genesis_Logo.png', class: 'img-responsive')
+          td
+            = link_to asset_url('partners/Globe.jpg'), data: {toggle: 'lightbox', title: 'Globe Telecoms', gallery: 'Sponsors'} do
+              = image_tag('partners/Globe.jpg', class: 'img-responsive')
+          td
+            = link_to asset_url('partners/ML.png'), data: {toggle: 'lightbox', title: 'MLhuillier', gallery: 'Sponsors'} do
+              = image_tag('partners/ML.png', class: 'img-responsive')
+
+
+
+

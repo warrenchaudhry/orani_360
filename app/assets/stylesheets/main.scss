@@ -263,3 +263,15 @@ table.dataTable thead .sorting:after {
 .no-sort::after { display: none!important; }
 
 .no-sort { pointer-events: none!important; cursor: default!important; }
+
+#partners-table {
+  td {
+    width:16.67%;
+    border:none;
+    img {
+      max-height:120px;
+      margin:auto;
+    }
+  }
+
+}
