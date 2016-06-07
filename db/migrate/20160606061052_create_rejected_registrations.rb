@@ -1,6 +1,6 @@
-class CreateRejectedRegistations < ActiveRecord::Migration
+class CreateRejectedRegistrations < ActiveRecord::Migration
   def change
-    create_table :rejected_registations do |t|
+    create_table :rejected_registrations do |t|
       t.integer :registration_id
       t.text :reason
       t.integer :rejected_by

@@ -12,4 +12,18 @@ class RegistrationMailer < ApplicationMailer
       mail( to: recipients, subject: 'New Registration - Orani 360 Half Marathon')
     end
   end
+
+  def approve(registration)
+    @registration = registration
+    if @registration.email.present?
+      mail( to: @registration.email, subject: 'Your registration for Orani 360 Half Marathon has been approved!')
+    end
+  end
+
+  def reject(registration)
+    @registration = registration
+    if @registration.email.present?
+      mail( to: @registration.email, subject: 'Your registration for Orani 360 Half Marathon has been disapproved!')
+    end
+  end
 end

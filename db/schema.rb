@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(version: 20160606061052) do
     t.datetime "attachment_updated_at"
     t.datetime "created_at",                                                       null: false
     t.datetime "updated_at",                                                       null: false
+    t.boolean  "is_walk_in",                                       default: false
     t.boolean  "admin_encoded",                                    default: false
     t.boolean  "is_paid_on_site",                                  default: false
     t.boolean  "active",                                           default: true
@@ -155,7 +156,7 @@ ActiveRecord::Schema.define(version: 20160606061052) do
   add_index "registrations", ["last_name"], name: "index_registrations_on_last_name"
   add_index "registrations", ["registration_no"], name: "index_registrations_on_registration_no"
 
-  create_table "rejected_registations", force: :cascade do |t|
+  create_table "rejected_registrations", force: :cascade do |t|
     t.integer  "registration_id"
     t.text     "reason"
     t.integer  "rejected_by"

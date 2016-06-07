@@ -1,6 +1,6 @@
 class Admin::RegistrationsController < Admin::BaseController
-  before_action :set_registration, only: [:show, :edit, :update, :destroy]
-  before_action :check_role, only: [:approve, :destroy]
+  before_action :set_registration, only: [:show, :edit, :update, :destroy, :approve, :pre_approval, :reject, :pre_reject]
+  before_action :check_role, only: [:destroy]
 
   def set_page_title
     @page_title = "Registrations Management"
@@ -22,7 +22,7 @@ class Admin::RegistrationsController < Admin::BaseController
       registrations = registrations.send(params[:s].strip.downcase)
     end
     if params[:singlet].present? && Registration::SINGLET.include?(params[:singlet])
-      registrations = registrations.send(params[:singlet].strip.downcase)
+      registrations = registrations.where(singlet: params[:singlet])
     end
     @registrations = registrations.reorder('TRIM(last_name)').page(params[:page]).per(params[:per])
   end
@@ -80,19 +80,41 @@ class Admin::RegistrationsController < Admin::BaseController
   end
 
   def pre_approval
-
+    @page_action = 'approve'
   end
 
   def approve
-
+    respond_to do |format|
+      @registration.approve
+      @registration.approved_by = current_user.id
+      if @registration.update(registration_params)
+        RegistrationMailer.approve(@registration).deliver
+        format.html { redirect_to admin_registration_path(@registration), notice: 'Registration has been approved.' }
+        format.json { render :show, status: :ok, location: @registration }
+      else
+        format.html { render :pre_approval }
+        format.json { render json: @registration.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
-  def pre_rejection
-
+  def pre_reject
+    @page_action = 'reject'
+    @registration.build_rejected_registration
   end
 
   def reject
+    respond_to do |format|
 
+      @registration.reject(current_user)
+      if @registration.update(registration_params)
+        format.html { redirect_to admin_registration_path(@registration), notice: 'Registration has been rejected.' }
+        format.json { render :show, status: :ok, location: @registration }
+      else
+        format.html { render :pre_reject }
+        format.json { render json: @registration.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
 
@@ -114,6 +136,7 @@ class Admin::RegistrationsController < Admin::BaseController
       params.require(:registration).permit(:registration_no, :email, :first_name, :last_name, :middle_name, :occupation, :grp_org_comp,
                                            :residential_address, :gender, :birth_date, :contact_numbers, :emergency_contact_name,
                                            :emergency_contact_number, :category, :singlet, :terms_accepted, :receive_newsletters, :approved,
-                                           :attachment, :date_registered, :admin_encoded, :is_paid_on_site, :bank_name, :is_free_registraion, :discount, :remarks)
+                                           :attachment, :date_registered, :admin_encoded, :is_paid_on_site, :bank_name, :is_free_registraion,
+                                           :discount, :remarks, rejected_registration_attributes: [:reason])
     end
 end

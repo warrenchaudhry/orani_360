@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     resources :sessions
     resources :users
     resources :pages
+    get 'registrations/:id/approve', to: 'registrations#pre_approval', as: 'pre_approve_registration'
+    put 'registrations/:id/approve', to: 'registrations#approve', as: 'approve_registration'
+    get 'registrations/:id/reject', to: 'registrations#pre_reject', as: 'pre_reject_registration'
+    put 'registrations/:id/reject', to: 'registrations#reject', as: 'reject_registration'
     resources :registrations
 
     get 'login' => 'sessions#new', :as => :login

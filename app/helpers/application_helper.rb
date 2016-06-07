@@ -64,7 +64,7 @@ module ApplicationHelper
     html = '<ol class="breadcrumb">' +
             '<li><a href='"#{admin_dashboards_path}"'><span class="fa fa-home"></span> Dashboard</a></li>' +
             '<li><a href='"#{url_for(controller: controller_name, action: 'index')}"'>' + controller_name.humanize.titleize + '</a></li>' +
-            '<li class="active">' + action_name.capitalize + '</li>' +
+            '<li class="active">' + (@page_action.present? ? @page_action.capitalize : action_name.humanize.capitalize) + '</li>' +
             '</ol>'
 
     raw(html)
