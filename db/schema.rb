@@ -138,7 +138,6 @@ ActiveRecord::Schema.define(version: 20160606061052) do
     t.datetime "attachment_updated_at"
     t.datetime "created_at",                                                       null: false
     t.datetime "updated_at",                                                       null: false
-    t.boolean  "is_walk_in",                                       default: false
     t.boolean  "admin_encoded",                                    default: false
     t.boolean  "is_paid_on_site",                                  default: false
     t.boolean  "active",                                           default: true

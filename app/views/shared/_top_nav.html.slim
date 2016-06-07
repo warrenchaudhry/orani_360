@@ -1,10 +1,14 @@
 ul.nav.navbar-top-links.navbar-right
   li.dropdown
-    = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
+    = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do  
       i.fa.fa-user.fa-fw
       = "#{current_user.first_name} "
       i.fa.fa-caret-down
     ul.dropdown-menu.dropdown-user
+      Li
+        = link_to '/', target: "_blank"
+          i.fa.fa-eye.fa-fw 
+          |&nbsp; View Website 
       li
         = link_to '#' do
           i.fa.fa-user.fa-fw

@@ -3,7 +3,7 @@ ruby '2.3.0'
 
 # Base
 gem 'rails', '4.2.5.2'
-gem 'pg', group: [:staging, :production]
+gem 'pg', group: :production
 gem 'rails_12factor', group: :production
 gem 'figaro'
 gem 'responders', '~> 2.0'
