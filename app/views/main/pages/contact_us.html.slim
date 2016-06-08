@@ -11,13 +11,13 @@
     p Orani Bataan<br>Philippines, 2112
     p
       i.fa.fa-phone
-      abbr title="Phone" &nbsp;P
-      | &nbsp;: (123) 456-7890
+      abbr title="Mobile" &nbsp;M
+      | &nbsp;: 0920 919 8237
     p
       i.fa.fa-envelope-o
       abbr title="Email" &nbsp;E
       | &nbsp;:&nbsp;
-      = mail_to 'name@example.com'
+      = mail_to 'orani360@inbox.comph'
     p
       i.fa.fa-clock-o
       abbr title="Hours" H
@@ -31,21 +31,14 @@
   .col-md-8
     h3 Get in touch with us
     hr
-    form#contactForm name="sentMessage" novalidate=""
-      .control-group.form-group
-        .controls
-          label Full Name:
-          input#name.form-control type="text"
-      .control-group.form-group
-        .controls
-          label Phone Number:
-          input#phone.form-control type="tel"
-      .control-group.form-group
-        .controls
-          label Email Address:
-          input#email.form-control type="email"
-      .control-group.form-group
-        .controls
-          label Message:
-          textarea#message.form-control type="email" rows="10" cols="100" maxlength="999" style="resize:none;"
-      button type="submit" class="btn btn-primary" Send Message
+    = simple_form_for @enquiry, url: send_enquiry_path, html: {multipart: true}  do |f|
+      = f.error_notification
+      .form-inputs
+        fieldset
+          = f.input :name, label: 'Full Name'
+          = f.input :email, label: 'Email Address'
+          = f.input :message
+      .form-actions
+        .row-fluid
+          .text-right
+            = f.button :submit, 'Send Message', class: 'btn btn-primary', data: {disable_with: 'Sending....'}
