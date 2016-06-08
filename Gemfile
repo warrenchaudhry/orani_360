@@ -51,6 +51,7 @@ gem 'httparty'
 gem 'validates_timeliness', '~> 4.0'
 gem 'nokogiri', '~> 1.6.8.rc2'
 gem 'nprogress-rails'
+gem 'faker'
 
 
 gem 'sdoc', '~> 0.4.0', group: :doc

@@ -38,6 +38,7 @@ class Registration < ActiveRecord::Base
     scope s.downcase.to_sym, -> { where(status: s.downcase) }
   end
   scope :active, -> {where(active: true)}
+  scope :approved, -> {where(approved: true)}
   validates_attachment_presence :attachment, unless: 'is_paid_on_site?'
   validates_attachment_content_type :attachment, :content_type => /\Aimage\/.*\Z/
   before_post_process :transliterate_file_name
@@ -58,6 +59,10 @@ class Registration < ActiveRecord::Base
 
     def categories
       CATEGORIES.collect {|reg| [ "#{reg[:name]} (P#{reg[:price]})", reg[:name] ]  }
+    end
+
+    def category_names
+      CATEGORIES.collect {|reg| reg[:name] }
     end
 
     def details_attributes

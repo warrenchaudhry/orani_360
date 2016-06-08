@@ -1,14 +1,17 @@
-table.table.table-bordered.table-listing
-  thead
-    tr
-      th BIB No
-      th FULL NAME
-      th GENDER
-      th AGE
-  tbody
-    - start_id.upto(end_id) do |i|
+- if runners.any?
+  table.table.table-bordered.table-listing
+    thead
       tr
-        td = "OFR#{'%04d' % i}"
-        td = "Runner #{i}"
-        td = ['M', 'F'].sample
-        td = rand(16..50)
+        th BIB No
+        th FULL NAME
+        th GENDER
+        th AGE
+    tbody
+      - runners.each do |r|
+        tr
+          td = r.registration_no
+          td = r.display_name
+          td = prettify_value(r, 'gender')
+          td = prettify_value(r, 'age')
+- else
+  p.lead No participants for this category
