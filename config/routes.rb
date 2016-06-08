@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   root :to => 'main#index'
   namespace :admin do
-    get '/' => 'dashboards#index'
+    get '/', to: 'dashboards#index'
     resources :dashboards, only: [:index]
     resources :customers
     resources :sessions
@@ -14,11 +14,12 @@ Rails.application.routes.draw do
     get 'registrations/:id/reject', to: 'registrations#pre_reject', as: 'pre_reject_registration'
     put 'registrations/:id/reject', to: 'registrations#reject', as: 'reject_registration'
     resources :registrations
-
-    get 'login' => 'sessions#new', :as => :login
-    delete 'logout' => 'sessions#destroy', :as => :logout
+    resources :enquiries, only: [:index, :show, :destroy]
+    get 'login', to: 'sessions#new', as: :login
+    delete 'logout', to: 'sessions#destroy', as: :logout
   end
   resources :registrations, only: [:new, :show, :create]
+  post 'enquiry', to: 'main#send_enquiry', as: 'send_enquiry'
   get '/(:page_url)', to: 'main#pages', constraints: UrlConstraint.new
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

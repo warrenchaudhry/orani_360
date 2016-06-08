@@ -9,8 +9,10 @@
               i.fa.fa-search
       li
         = sidebar_link('dashboards', 'Dashboard', 'fa fa-dashboard fa-fw')
-      li
+      li.hidden
         = sidebar_link('pages', 'Pages', 'fa fa-book')
+      li
+        = sidebar_link('enquiries', 'Enquiries', 'fa fa-phone-square')
       li
         = sidebar_link('registrations', 'Registrations', 'fa fa-registered')
       - if current_user.is_admin?
