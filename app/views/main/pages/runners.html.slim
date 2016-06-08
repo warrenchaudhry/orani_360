@@ -9,50 +9,16 @@
 .row
   .col-lg-12
     h2.page-header Categories
+  - Registration::CATEGORIES.each do |cat|
+    .col-md-3.col-sm-6
+      .panel.panel-default.text-center
+        .panel-heading *{class: "cat-#{cat[:name].downcase}"}
+          .span.fa-stack.fa-5x
+            div.huge style="color:#fff;" = cat[:name]
 
-  .col-md-3.col-sm-6
-    .panel.panel-default.text-center
-      .panel-heading.cat-3k
-        .span.fa-stack.fa-5x
-          div.huge style="color:#fff;" 3K
-
-      .panel-body
-        h3 100
-        p Runners
-
-
-  .col-md-3.col-sm-6
-    .panel.panel-default.text-center
-      .panel-heading.cat-5k
-        .span.fa-stack.fa-5x
-          div.huge style="color:#fff;" 5K
-
-      .panel-body
-        h3 120
-        p Runners
-
-
-  .col-md-3.col-sm-6
-    .panel.panel-default.text-center
-      .panel-heading.cat-10k
-        .span.fa-stack.fa-5x
-          div.huge style="color:#fff;" 10K
-
-      .panel-body
-        h3 90
-        p Runners
-
-
-
-  .col-md-3.col-sm-6
-    .panel.panel-default.text-center
-      .panel-heading.cat-21k
-        .span.fa-stack.fa-5x
-          div.huge style="color:#fff;" 21K
-
-      .panel-body
-        h3 140
-        p Runners
+        .panel-body
+          h3 = @runners.fetch_by_category(cat[:name]).size
+          p Runners
 
 .row
-  == render 'main/pages/runners_tab'
+  == render 'main/pages/runners_tab', runners: @runners
