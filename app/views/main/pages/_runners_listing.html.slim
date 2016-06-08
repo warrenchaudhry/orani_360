@@ -5,13 +5,13 @@
         th BIB No
         th FULL NAME
         th GENDER
-        th AGE
+        th GROUP / ORG. / COMPANY
     tbody
       - runners.each do |r|
         tr
           td = r.registration_no
           td = r.display_name
           td = prettify_value(r, 'gender')
-          td = prettify_value(r, 'age')
+          td = prettify_value(r, 'grp_org_comp')
 - else
   p.lead No participants for this category
