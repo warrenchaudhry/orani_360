@@ -30,7 +30,7 @@ module InboxCms
     # config.i18n.default_locale = :de
 
 
-    config.action_mailer.default_url_options = { host: ENV['HOST'] || 'orani360.herokuapp.com'}
+    config.action_mailer.default_url_options = { host: ENV['HOST'] || 'orani360.inbox.com.ph'}
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
