@@ -1,3 +1,5 @@
+p style="color:red;font-style:italic;"
+  |Note: This Online Registration requires a picture of your deposit slip to our given bank account numbers or money remittance partner. We hope you find this feature more convenient for you, for us, making our beloved runners satisfied with our service.
 = simple_form_for @registration, url: registrations_path, html: {multipart: true}  do |f|
   = f.error_notification
 
@@ -47,7 +49,7 @@
                   = f.input :bank_name, collection: ['BDO', 'BPI'], selected: f.object.bank_name, prompt: 'Please Select', required: true
               .row
                 .col-md-8
-                  = f.input :attachment, label: 'Attach Deposit Slip', required: true
+                  = f.input :attachment, label: 'Attach Deposit / Payment Slip', required: true
               .row
                 .col-md-12
                   = f.input :terms_accepted, label: ' I have read the <b><a href="#" data-toggle="modal" data-target="#termsModal">RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK, AND INDEMNITY AGREEMENT</a></b>'.html_safe, required: true
