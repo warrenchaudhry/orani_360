@@ -6,7 +6,7 @@ class MainController < ApplicationController
     @meta = {
       title: 'Orani 360 - Half Marathon',
       description: 'August 14, 2016 | Orani Plaza | Deadline of registration is on July 31, 2016',
-      url: 'https://orani360.herokuapp.com',
+      url: 'http://orani360.inbox.com.ph',
       image: view_context.asset_url('360brand.png')
     }
   end
@@ -19,14 +19,14 @@ class MainController < ApplicationController
       @runners = Registration.active.approved.where.not(registration_no: nil).order('registration_no ASC')
       @meta = {
         title: 'Orani 360 - Half Marathon | Registered Runners',
-        url: 'https://orani360.herokuapp.com/runners',
+        url: 'http://orani360.inbox.com.ph/runners',
         image: view_context.asset_url('runners_banner.jpg')
       }
     elsif params[:page_url].underscore == 'contact_us'
       @enquiry = Enquiry.new
       @meta = {
         title: 'Orani 360 - Half Marathon | Contact Us',
-        url: 'https://orani360.herokuapp.com/contact-us'
+        url: 'http://orani360.inbox.com.ph/contact-us'
       }
     end
     render "main/pages/#{params[:page_url].underscore}"
