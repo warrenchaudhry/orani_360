@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606061052) do
+ActiveRecord::Schema.define(version: 20160608140816) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -59,6 +59,17 @@ ActiveRecord::Schema.define(version: 20160606061052) do
     t.datetime "attachment_updated_at"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "enquiries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "message"
+    t.string   "ip_address"
+    t.datetime "sent_at"
+    t.boolean  "is_active",  default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
