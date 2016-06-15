@@ -38,7 +38,10 @@ class Registration < ActiveRecord::Base
     scope s.downcase.to_sym, -> { where(status: s.downcase) }
   end
   scope :active, -> {where(active: true)}
-  scope :approved, -> {where(approved: true)}
+  scope :approved, -> {where(status: 'approved')}
+  scope :rejected, -> {where(status: 'rejected')}
+  scope :pending, -> {where(status: 'pending')}
+  scope :free, -> {where(is_free_registraion: true)}
   validates_attachment_presence :attachment, unless: 'is_paid_on_site?'
   validates_attachment_content_type :attachment, :content_type => /\Aimage\/.*\Z/
   before_post_process :transliterate_file_name
@@ -75,6 +78,10 @@ class Registration < ActiveRecord::Base
 
     def fetch_by_category(category)
       where(category: category)
+    end
+
+    def total
+      sum(:amount)
     end
 
   end

@@ -1,1 +1,116 @@
-= render 'layouts/content'
+.row
+  /! 3K panel
+  .col-lg-3.col-md-6
+    .panel.panel-yellow
+      .panel-heading
+        .row
+          .col-xs-3
+            .huge 3K
+          .col-xs-9.text-right
+            .huge = @registrations.free.fetch_by_category('3K').size
+            span participants
+      = link_to admin_registrations_path(cat: '3K') do
+        .panel-footer
+          span.pull-left View Details
+          span.pull-right
+            i.fa.fa-arrow-circle-right
+          .clearfix
+
+  /! 5K panel
+  .col-lg-3.col-md-6
+    .panel.panel-green
+      .panel-heading
+        .row
+          .col-xs-3
+            .huge 5K
+          .col-xs-9.text-right
+            .huge = @registrations.free.fetch_by_category('5K').size
+            span participants
+      = link_to admin_registrations_path(cat: '5K') do
+        .panel-footer
+          span.pull-left View Details
+          span.pull-right
+            i.fa.fa-arrow-circle-right
+          .clearfix
+
+  /! 10K panel
+  .col-lg-3.col-md-6
+    .panel.panel-red
+      .panel-heading
+        .row
+          .col-xs-3
+            .huge 10K
+          .col-xs-9.text-right
+            .huge = @registrations.free.fetch_by_category('10K').size
+            span participants
+      = link_to admin_registrations_path(cat: '10K') do
+        .panel-footer
+          span.pull-left View Details
+          span.pull-right
+            i.fa.fa-arrow-circle-right
+          .clearfix
+
+  /! 21K panel
+  .col-lg-3.col-md-6
+    .panel.panel-primary
+      .panel-heading
+        .row
+          .col-xs-3
+            .huge 21K
+          .col-xs-9.text-right
+            .huge = @registrations.free.fetch_by_category('21K').size
+            span participants
+      = link_to admin_registrations_path(cat: '21K') do
+        .panel-footer
+          span.pull-left View Details
+          span.pull-right
+            i.fa.fa-arrow-circle-right
+          .clearfix
+
+.row
+  .col-lg-12
+    table#reg-info-table.table.table-bordered
+      thead
+        tr
+          th Category
+          th Pending
+          th Rejected
+          th Approved
+          th Free
+          th Total
+      tbody
+        tr
+          td 3K
+          td = @registrations.rejected.fetch_by_category('3K').size
+          td = @registrations.pending.fetch_by_category('3K').size
+          td = @registrations.approved.fetch_by_category('3K').size
+          td = @registrations.free.fetch_by_category('3K').size
+          td = number_to_currency @registrations.approved.fetch_by_category('3K').total, unit: 'P'
+        tr
+          td 5K
+          td = @registrations.rejected.fetch_by_category('5K').size
+          td = @registrations.pending.fetch_by_category('5K').size
+          td = @registrations.approved.fetch_by_category('5K').size
+          td = @registrations.free.fetch_by_category('5K').size
+          td = number_to_currency @registrations.approved.fetch_by_category('5K').total, unit: 'P'
+        tr
+          td 10K
+          td = @registrations.rejected.fetch_by_category('10K').size
+          td = @registrations.pending.fetch_by_category('10K').size
+          td = @registrations.approved.fetch_by_category('10K').size
+          td = @registrations.free.fetch_by_category('10K').size
+          td = number_to_currency @registrations.approved.fetch_by_category('10K').total, unit: 'P'
+        tr
+          td 21K
+          td = @registrations.rejected.fetch_by_category('21K').size
+          td = @registrations.pending.fetch_by_category('21K').size
+          td = @registrations.approved.fetch_by_category('21K').size
+          td = @registrations.free.fetch_by_category('21K').size
+          td = number_to_currency @registrations.approved.fetch_by_category('21K').total, unit: 'P'
+        tr.total-row
+          td
+          td = @registrations.rejected.size
+          td = @registrations.pending.size
+          td = @registrations.approved.size
+          td = @registrations.free.size
+          td = number_to_currency @registrations.approved.total, unit: 'P'

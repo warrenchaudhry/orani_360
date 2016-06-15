@@ -370,3 +370,21 @@ table.dataTable thead .sorting:after {
     margin-left: 5px;
   }
 }
+
+#reg-info-table {
+  th {
+    text-align:center;
+  }
+  td:first-child {
+    font-weight:bold;
+  }
+  td:not(:first-child) {
+    text-align:right;
+  }
+  tr.total-row {
+    td {
+      border-top: 2px solid #000;
+      font-weight:bold;
+    }
+  }
+}
