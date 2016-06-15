@@ -26,6 +26,7 @@ class RegistrationsController < ApplicationController
   def create
     @registration = Registration.new(registration_params)
     @registration.date_registered = Date.current
+    @registration.status = 'pending'
     respond_to do |format|
       if @registration.save
         format.html { redirect_to registration_path(@registration) }

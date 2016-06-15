@@ -27,11 +27,11 @@ module ApplicationHelper
       val = val.to_s(:long) rescue nil
     elsif obj.class.column_names.include?(attr) && obj.column_for_attribute(attr).type == :boolean
       val = val ? 'Yes' : 'No'
-    elsif attr == 'mi'
+    elsif attr == 'mi' && val.present?
       val = "#{val}."
-    elsif attr == 'email'
+    elsif attr == 'email' && val.present?
       val = mail_to val
-    elsif attr == 'status'
+    elsif attr == 'status' && val.present?
       val = val.capitalize
     end
     return '--' if val.blank?
