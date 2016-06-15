@@ -7,7 +7,7 @@
           .col-xs-3
             .huge 3K
           .col-xs-9.text-right
-            .huge = @registrations.free.fetch_by_category('3K').size
+            .huge = @registrations.approved.fetch_by_category('3K').size
             span participants
       = link_to admin_registrations_path(cat: '3K') do
         .panel-footer
@@ -24,7 +24,7 @@
           .col-xs-3
             .huge 5K
           .col-xs-9.text-right
-            .huge = @registrations.free.fetch_by_category('5K').size
+            .huge = @registrations.approved.fetch_by_category('5K').size
             span participants
       = link_to admin_registrations_path(cat: '5K') do
         .panel-footer
@@ -41,7 +41,7 @@
           .col-xs-3
             .huge 10K
           .col-xs-9.text-right
-            .huge = @registrations.free.fetch_by_category('10K').size
+            .huge = @registrations.approved.fetch_by_category('10K').size
             span participants
       = link_to admin_registrations_path(cat: '10K') do
         .panel-footer
@@ -58,7 +58,7 @@
           .col-xs-3
             .huge 21K
           .col-xs-9.text-right
-            .huge = @registrations.free.fetch_by_category('21K').size
+            .huge = @registrations.approved.fetch_by_category('21K').size
             span participants
       = link_to admin_registrations_path(cat: '21K') do
         .panel-footer
@@ -79,34 +79,14 @@
           th Free
           th Total
       tbody
-        tr
-          td 3K
-          td = @registrations.rejected.fetch_by_category('3K').size
-          td = @registrations.pending.fetch_by_category('3K').size
-          td = @registrations.approved.fetch_by_category('3K').size
-          td = @registrations.free.fetch_by_category('3K').size
-          td = number_to_currency @registrations.approved.fetch_by_category('3K').total, unit: 'P'
-        tr
-          td 5K
-          td = @registrations.rejected.fetch_by_category('5K').size
-          td = @registrations.pending.fetch_by_category('5K').size
-          td = @registrations.approved.fetch_by_category('5K').size
-          td = @registrations.free.fetch_by_category('5K').size
-          td = number_to_currency @registrations.approved.fetch_by_category('5K').total, unit: 'P'
-        tr
-          td 10K
-          td = @registrations.rejected.fetch_by_category('10K').size
-          td = @registrations.pending.fetch_by_category('10K').size
-          td = @registrations.approved.fetch_by_category('10K').size
-          td = @registrations.free.fetch_by_category('10K').size
-          td = number_to_currency @registrations.approved.fetch_by_category('10K').total, unit: 'P'
-        tr
-          td 21K
-          td = @registrations.rejected.fetch_by_category('21K').size
-          td = @registrations.pending.fetch_by_category('21K').size
-          td = @registrations.approved.fetch_by_category('21K').size
-          td = @registrations.free.fetch_by_category('21K').size
-          td = number_to_currency @registrations.approved.fetch_by_category('21K').total, unit: 'P'
+        - %w(3K 5K 10K 21K).each do |reg|
+          tr
+            td = reg
+            td = @registrations.rejected.fetch_by_category(reg).size
+            td = @registrations.pending.fetch_by_category(reg).size
+            td = @registrations.approved.fetch_by_category(reg).size
+            td = @registrations.free.fetch_by_category(reg).size
+            td = number_to_currency @registrations.approved.fetch_by_category(reg).total, unit: 'P'
         tr.total-row
           td
           td = @registrations.rejected.size
