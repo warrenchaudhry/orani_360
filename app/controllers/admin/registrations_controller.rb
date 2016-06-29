@@ -71,7 +71,7 @@ class Admin::RegistrationsController < Admin::BaseController
   end
 
   def destroy
-    @registration.update_attributes(active: false)
+    @registration.update_attributes(active: false, status: 'archived')
     respond_to do |format|
       format.html { redirect_to admin_registrations_path, notice: 'Registration was successfully deleted.' }
       format.json { head :no_content }

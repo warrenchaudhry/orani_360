@@ -18,7 +18,7 @@ class Registration < ActiveRecord::Base
            :emergency_contact_name, :emergency_contact_number, :bank_name, presence: true, unless: 'is_paid_on_site?'
   validates :registration_no, :date_registered, presence: true, if: 'admin_encoded? || for_approval.present?'
   validates :date_registered, presence: true, if: 'admin_encoded?'
-  validates :registration_no, uniqueness: true, allow_blank: true
+  validates_uniqueness_of :registration_no, allow_blank: true, conditions: -> { where(active: true) }
   validates :email, format: EMAIL_REGEX, allow_blank: true
   validates_date :birth_date, on_or_before: lambda { Date.current }, allow_blank: true
   validate :check_if_terms_accepted, on: :create, unless: 'admin_encoded.present?'
