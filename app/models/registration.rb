@@ -156,9 +156,9 @@ class Registration < ActiveRecord::Base
   end
 
   def notify_admins
-    if self.persisted?
-      RegistrationMailer.notify_admins(self).deliver_now
-    end
+    #if self.persisted?
+      #RegistrationMailer.notify_admins(self).deliver_now
+    #end
   end
 
   def approve
