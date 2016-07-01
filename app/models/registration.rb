@@ -34,9 +34,9 @@ class Registration < ActiveRecord::Base
   :default_style => :thumb
   has_one :rejected_registration
   accepts_nested_attributes_for :rejected_registration
-  STATUS.each do |s|
-    scope s.downcase.to_sym, -> { where(status: s.downcase) }
-  end
+  # STATUS.each do |s|
+  #   scope s.downcase.to_sym, -> { where(status: s.downcase) }
+  # end
   scope :active, -> {where(active: true)}
   scope :approved, -> {where(status: 'approved')}
   scope :rejected, -> {where(status: 'rejected')}
@@ -77,7 +77,7 @@ class Registration < ActiveRecord::Base
     end
 
     def fetch_by_category(category)
-      where('LOWER(category) = ?', category.downcase)
+      where("LOWER(category) = ?", category.strip.downcase)
     end
 
     def total

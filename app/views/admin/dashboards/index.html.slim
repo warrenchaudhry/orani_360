@@ -82,15 +82,15 @@
         - %w(3K 5K 10K 21K).each do |reg|
           tr
             td = reg
-            td = @registrations.rejected.fetch_by_category(reg).size
             td = @registrations.pending.fetch_by_category(reg).size
+            td = @registrations.rejected.fetch_by_category(reg).size
             td = @registrations.approved.fetch_by_category(reg).size
             td = @registrations.free.fetch_by_category(reg).size
             td = number_to_currency @registrations.approved.fetch_by_category(reg).total, unit: 'P'
         tr.total-row
           td
-          td = @registrations.rejected.size
           td = @registrations.pending.size
+          td = @registrations.rejected.size
           td = @registrations.approved.size
           td = @registrations.free.size
           td = number_to_currency @registrations.approved.total, unit: 'P'
