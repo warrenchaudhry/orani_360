@@ -77,7 +77,7 @@ class Registration < ActiveRecord::Base
     end
 
     def fetch_by_category(category)
-      where(category: category)
+      where('LOWER(category) = ?', category.downcase)
     end
 
     def total
@@ -156,7 +156,9 @@ class Registration < ActiveRecord::Base
   end
 
   def notify_admins
-    RegistrationMailer.notify_admins(self).deliver_now
+    if self.persisted?
+      RegistrationMailer.notify_admins(self).deliver_now
+    end
   end
 
   def approve
