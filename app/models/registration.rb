@@ -7,7 +7,7 @@ class Registration < ActiveRecord::Base
     {name: '21K', price: 700}
   ]
   SINGLET = %w(XS SM MD LG XL XXL)
-  STATUS = %w(Approved Pending Rejected)
+  STATUS = %w(Approved Pending Rejected Free Online)
   # has_many :deposit_attachments,  dependent: :destroy
   # accepts_nested_attributes_for :deposit_attachments, allow_destroy: true, :reject_if => :all_blank
   EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
@@ -42,6 +42,7 @@ class Registration < ActiveRecord::Base
   scope :rejected, -> {where(status: 'rejected')}
   scope :pending, -> {where(status: 'pending')}
   scope :free, -> {where(is_free_registraion: true)}
+  scope :online, -> {where(admin_encoded: false)}
   validates_attachment_presence :attachment, unless: 'is_paid_on_site?'
   validates_attachment_content_type :attachment, :content_type => /\Aimage\/.*\Z/
   before_post_process :transliterate_file_name
@@ -57,7 +58,7 @@ class Registration < ActiveRecord::Base
   class << self
 
     def display_attributes
-      %w{registration_no display_name category gender status paid_online updated_at}
+      %w{registration_no display_name category gender status date_registered}
     end
 
     def categories
@@ -128,7 +129,7 @@ class Registration < ActiveRecord::Base
 
   def full_name(scope = nil)
     if scope == 'reverse'
-      "#{last_name.capitalize}, #{first_name.capitalize} #{middle_name.present? ? "#{middle_name.first.capitalize}." : nil}".squish
+      "#{last_name.titleize}, #{first_name.titleize} #{middle_name.present? ? "#{middle_name.first.capitalize}." : nil}".squish
     elsif scope == 'display'
       puts 'Im on display'
       name = []
@@ -141,9 +142,9 @@ class Registration < ActiveRecord::Base
           end
         end
       end
-      name.join(' ').gsub(/\b\w/){$&.upcase}
+      name.join(' ').gsub(/\b\w/){$&.titleize}
     else
-      [first_name, middle_name, last_name].select(&:present?).join(' ').gsub(/\b\w/){$&.upcase}
+      [first_name, middle_name, last_name].select(&:present?).join(' ').gsub(/\b\w/){$&.titleize}
     end
   end
 

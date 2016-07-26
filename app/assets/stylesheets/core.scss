@@ -388,3 +388,12 @@ table.dataTable thead .sorting:after {
     }
   }
 }
+
+th.with-sort {
+  i {
+    margin-left:5px;
+    &.unsorted {
+      color:#c3c3c3;
+    }
+  }
+}
