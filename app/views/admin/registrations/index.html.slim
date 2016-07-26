@@ -18,7 +18,8 @@
                 thead
                   tr
                     - @registrations.display_attributes.each do |attr|
-                      th.text-center = formalize_header(attr)
+                      th.text-center.with-sort
+                        = sortable(formalize_header(attr), attr)
                     th.no-sort.text-center Actions
 
                 tbody

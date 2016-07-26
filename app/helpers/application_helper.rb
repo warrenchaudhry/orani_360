@@ -52,6 +52,10 @@ module ApplicationHelper
       header = 'Last Updated By'
     elsif attr == 'display_name'
       header = 'Name'
+    elsif attr == 'registration_no'
+      header = 'Reg. No'
+    elsif attr == 'date_registered'
+      header = 'Registered At'
     elsif attr == 'last_login_from_ip_address'
       header = 'IP Address'
     else
@@ -68,6 +72,20 @@ module ApplicationHelper
             '</ol>'
 
     raw(html)
+  end
+
+  def sortable(label, attr)
+    sort_direction = params[:direction]
+    sort_direction_params = sort_direction == 'DESC' ? 'ASC' : 'DESC'
+    sort_icon_class = if params[:sort] == attr
+                  sort_direction == 'DESC' ? 'fa fa-fw fa-sort-asc' : 'fa fa-fw fa-sort-desc'
+                else
+                  'fa fa-fw fa-sort unsorted'
+                end
+    link_to params.merge(sort: attr, direction: sort_direction_params) do
+      concat(label)
+      concat(content_tag(:i, nil, class: sort_icon_class))
+    end
   end
 
 end

@@ -10,7 +10,10 @@ class Admin::RegistrationsController < Admin::BaseController
   def index
     params[:page] ||= 1
     params[:per] ||= 25
+    params[:sort] ||= 'date_registered'
+    params[:direction] ||= 'DESC'
     registrations = Registration.active.order('date_registered')
+    sort_order = params[:sort] == 'display_name' ? 'last_name' : params[:sort]
     if params[:q].present?
       keyword = params[:q].strip.downcase
       registrations = registrations.where('TRIM(LOWER(first_name)) LIKE :keyword OR TRIM(LOWER(middle_name)) LIKE :keyword OR TRIM(LOWER(last_name)) LIKE :keyword OR registration_no LIKE :keyword', keyword: "%#{keyword}%")
@@ -24,7 +27,8 @@ class Admin::RegistrationsController < Admin::BaseController
     if params[:singlet].present? && Registration::SINGLET.include?(params[:singlet])
       registrations = registrations.where(singlet: params[:singlet])
     end
-    @registrations = registrations.reorder('TRIM(last_name)').page(params[:page]).per(params[:per])
+
+    @registrations = registrations.reorder("#{sort_order} #{params[:direction]}").page(params[:page]).per(params[:per])
   end
 
   def new
