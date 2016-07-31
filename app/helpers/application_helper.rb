@@ -78,7 +78,7 @@ module ApplicationHelper
     sort_direction = params[:direction]
     sort_direction_params = sort_direction == 'DESC' ? 'ASC' : 'DESC'
     sort_icon_class = if params[:sort] == attr
-                  sort_direction == 'DESC' ? 'fa fa-fw fa-sort-asc' : 'fa fa-fw fa-sort-desc'
+                  "fa fa-fw fa-sort-#{sort_direction.downcase}"
                 else
                   'fa fa-fw fa-sort unsorted'
                 end
