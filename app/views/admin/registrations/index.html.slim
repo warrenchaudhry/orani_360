@@ -25,7 +25,7 @@
                 tbody
                   - @registrations.each do |reg|
                     tr
-                      - centered_alinged_attrs = ['category', 'gender', 'approved', 'paid_online']
+                      - centered_alinged_attrs = ['category', 'gender', 'approved', 'singlet', 'paid_online']
                       - @registrations.display_attributes.each do |attr|
                         td *{class: centered_alinged_attrs.include?(attr) ? 'text-center' : nil } = prettify_value(reg, attr)
                       td style="width:220px;"

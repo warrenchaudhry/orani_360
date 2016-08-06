@@ -58,7 +58,7 @@ class Registration < ActiveRecord::Base
   class << self
 
     def display_attributes
-      %w{registration_no display_name category gender status date_registered}
+      %w{registration_no display_name category singlet gender status date_registered}
     end
 
     def categories
