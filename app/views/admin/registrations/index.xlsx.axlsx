@@ -1,11 +1,25 @@
 wb = xlsx_package.workbook
+header_styles = wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :center }, b: true, bg_color: "0066CC", fg_color: "FF")
+wb.add_worksheet(name: 'Overview') do |sheet|
+	info_ctr = 1
+	info_style = wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER)
+	sheet.add_row ['Category', 'Registration Fee', 'Male Participants', 'Female Participants', 'Total Participants', 'Free', 'Gross Amount', 'Less: Free Registration', 'Total Registration Amount'], style: header_styles
+	Registration.category_names.each do |cat|
+		registrations = @registrations.fetch_by_category(cat)
+		info_ctr += 1
+		sheet.add_row registrations.build_overview_row(cat, info_ctr), style: info_style
+	end
+	total_row = ['TOTAL', nil]
+	('C'..'I').to_a.each do |alpha|
+		total_row << "=SUM(#{alpha}2:#{alpha}#{info_ctr})"
+	end
+	sheet.add_row total_row, style: wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER, b: true)
+end
 Registration.category_names.each do |cat|
 	wb.add_worksheet(name: cat) do |sheet|
 	  cell_styles = []
 	  types = []
-	  header_styles = wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :center }, b: true, bg_color: "0066CC", fg_color: "FF")
-	  default_style= wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER,
-                                   alignment: { horizontal: :left })
+	  default_style= wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :left })
 	  date_cell = wb.styles.add_style(format_code: "YYYY-MM-DD", border: Axlsx::STYLE_THIN_BORDER)
 	  num = wb.styles.add_style :num_fmt => 4
 	  wrap = wb.styles.add_style alignment: {wrap_text: true}
