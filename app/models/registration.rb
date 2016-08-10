@@ -118,6 +118,30 @@ class Registration < ActiveRecord::Base
       sum(:amount)
     end
 
+    def build_overview_row(cat, ctr)
+      #['Category', 'Registration Fee', 'Male Participants', 'Female Participants', 'Total Participants', 'Free', 'Gross Amount', 'Less: Free Registration', 'Total Registration Amount']
+      # sheet.add_row ['Male Participants', registrations.male.size], style: info_style
+      # sheet.add_row ['Female Participants', registrations.female.size], style: info_style
+      # sheet.add_row ['Total Participants', "=B#{info_ctr} + B#{info_ctr + 1}"], style: info_style
+      # sheet.add_row ['Free Participants', registrations.free.size], style: info_style
+      # sheet.add_row [nil, nil], style: info_style
+      # sheet.add_row ['Registration Fee', Registration.category_price(cat)], style: info_style
+      # sheet.add_row ['Gross Amount', "=B#{info_ctr + 2} * B#{info_ctr + 5}"], style: info_style
+      # sheet.add_row ['Less: Free Registration', "=B#{info_ctr + 3} * B#{info_ctr + 5}"], style: wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER, fg_color: "D25C51")
+      # sheet.add_row ['Total Registration Amount', "=B#{info_ctr + 6} - B#{info_ctr + 7}"], style: wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER, b: true)
+      row = []
+      row << cat
+      row << category_price(cat)
+      row << male.size
+      row << female.size
+      row << "=C#{ctr} + D#{ctr}"
+      row << free.size
+      row << "=E#{ctr} * B#{ctr}"
+      row << "=F#{ctr} * B#{ctr} * -1"
+      row << "=G#{ctr} + H#{ctr}"
+      row
+    end
+
   end
 
   def assign_defaults
