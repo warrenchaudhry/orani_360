@@ -43,6 +43,8 @@ class Registration < ActiveRecord::Base
   scope :pending, -> {where(status: 'pending')}
   scope :free, -> {where(is_free_registraion: true)}
   scope :online, -> {where(admin_encoded: false)}
+  scope :male, -> {where(gender: 'Male')}
+  scope :female, -> {where(gender: 'Female')}
   validates_attachment_presence :attachment, unless: 'is_paid_on_site?'
   validates_attachment_content_type :attachment, :content_type => /\Aimage\/.*\Z/
   before_post_process :transliterate_file_name
@@ -54,6 +56,33 @@ class Registration < ActiveRecord::Base
   HUMANIZED_ATTRIBUTES = {
       grp_org_comp: 'Group / Org. / Company',
   }
+  REPORT_HEADERS = [
+    'Registration No.',
+    'Category',
+    'Singlet',
+    'Last Name',
+    'First Name',
+    'Middle Name',
+    'Email',
+    'Occupation',
+    'Group/Organization/Company',
+    'Address',
+    'Age',
+    'Age on Race Day',
+    'Gender',
+    'Birth Date',
+    'Contact No.',
+    'Emergency Contact Name',
+    'Emergency Contact Number',
+    'Paid On-Site',
+    'Bank Name',
+    'Date Registered',
+    'Approved By',
+    'Approved At',
+    'Free',
+    'Amount',
+    'Remarks'
+  ]
 
   class << self
 
@@ -67,6 +96,10 @@ class Registration < ActiveRecord::Base
 
     def category_names
       CATEGORIES.collect {|reg| reg[:name] }
+    end
+
+    def category_price(name)
+      CATEGORIES.select {|cat| cat[:name] == name}[0][:price] rescue 0
     end
 
     def details_attributes
@@ -183,6 +216,36 @@ class Registration < ActiveRecord::Base
       return self.rejected_registration.disapprover
     end
     nil
+  end
+
+  def build_xlsx_row(ctr)
+    row = []
+    row << self.registration_no # 'Registration No.'
+    row << self.category # 'Category'
+    row << self.singlet # 'Singlet'
+    row << self.last_name # 'Last Name'
+    row << self.first_name # 'First Name'
+    row << self.middle_name # 'Middle Name'
+    row << self.email # 'Email'
+    row << self.occupation # 'Occupation'
+    row << self.grp_org_comp # 'Group/Organization/Company'
+    row << self.residential_address # 'Address'
+    row << self.age # 'Age'
+    row << self.age_on_race_day # 'Age on Race Day'
+    row << self.gender # 'Gender'
+    row << self.birth_date # 'Birth Date'
+    row << self.contact_numbers # 'Contact No.'
+    row << self.emergency_contact_name # 'Emergency Contact Name'
+    row << self.emergency_contact_number # 'Emergency Contact Number'
+    row << (self.admin_encoded? ? 'No' : 'Yes') # 'Paid On-Site'
+    row << self.bank_name # 'Bank Name'
+    row << self.date_registered # 'Date Registered'
+    row << self.approver.try(:full_name) # 'Approved By'
+    row << (self.approved_at.present? ? self.approved_at.to_date : nil) # 'Approved At'
+    row << (self.is_free_registraion? ? 'Yes' : 'No') # 'Free'
+    row << self.amount # 'Amount'
+    row << self.remarks # 'Remarks'
+    row
   end
 
   private

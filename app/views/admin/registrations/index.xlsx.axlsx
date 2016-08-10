@@ -1,0 +1,49 @@
+wb = xlsx_package.workbook
+Registration.category_names.each do |cat|
+	wb.add_worksheet(name: cat) do |sheet|
+	  cell_styles = []
+	  types = []
+	  header_styles = wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :center }, b: true, bg_color: "0066CC", fg_color: "FF")
+	  default_style= wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER,
+                                   alignment: { horizontal: :left })
+	  date_cell = wb.styles.add_style(format_code: "YYYY-MM-DD", border: Axlsx::STYLE_THIN_BORDER)
+	  num = wb.styles.add_style :num_fmt => 4
+	  wrap = wb.styles.add_style alignment: {wrap_text: true}
+	  (0..24).each do |a|
+	    if a == 0 || a == 22 || a == 17 || a == 14 || a == 16
+	      types[a] = :string
+      elsif a == 21 || a == 13 || a == 19
+        types[a] = :date
+      else
+        types[a] = nil
+	    end
+	    if a == 0 || a == 14 || a == 16 || a == 23
+	      cell_styles[a] = wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :right })
+      elsif a == 21 || a == 13 || a == 19
+        cell_styles[a] = date_cell
+	    else
+	      cell_styles[a] = default_style
+	    end
+	  end
+	  ctr = 1
+	  sheet.add_row Registration::REPORT_HEADERS, style: header_styles
+	  registrations = @registrations.fetch_by_category(cat)
+	  registrations.each do |reg|
+	    ctr += 1
+	    sheet.add_row reg.build_xlsx_row(ctr), style: cell_styles, types: types
+	  end
+	  sheet.add_row
+	  sheet.add_row
+	  info_ctr = ctr + 3
+	  info_style = wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER)
+	  sheet.add_row ['Male Participants', registrations.male.size], style: info_style
+	  sheet.add_row ['Female Participants', registrations.female.size], style: info_style
+	  sheet.add_row ['Total Participants', "=B#{info_ctr} + B#{info_ctr + 1}"], style: info_style
+	  sheet.add_row ['Free Participants', registrations.free.size], style: info_style
+	  sheet.add_row [nil, nil], style: info_style
+	  sheet.add_row ['Registration Fee', Registration.category_price(cat)], style: info_style
+	  sheet.add_row ['Gross Amount', "=B#{info_ctr + 2} * B#{info_ctr + 5}"], style: info_style
+	  sheet.add_row ['Less: Free Registration', "=B#{info_ctr + 3} * B#{info_ctr + 5}"], style: wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER, fg_color: "D25C51")
+	  sheet.add_row ['Total Registration Amount', "=B#{info_ctr + 6} - B#{info_ctr + 7}"], style: wb.styles.add_style(border: Axlsx::STYLE_THIN_BORDER, b: true)
+	end
+end

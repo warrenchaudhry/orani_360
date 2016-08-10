@@ -27,8 +27,14 @@ class Admin::RegistrationsController < Admin::BaseController
     if params[:singlet].present? && Registration::SINGLET.include?(params[:singlet])
       registrations = registrations.where(singlet: params[:singlet])
     end
-
     @registrations = registrations.reorder("#{sort_order} #{params[:direction]}").page(params[:page]).per(params[:per])
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        @registrations = Registration.active.approved.includes(:approver).order('registration_no')
+        response.headers['Content-Disposition'] = 'attachment; filename="registrations_report.xlsx"'
+      end
+    end
   end
 
   def new
