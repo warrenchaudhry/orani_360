@@ -5,7 +5,9 @@
     br
     .panel.panel-primary
       .panel-heading
-        = "#{controller_name.humanize.titleize} Listing"
+        h4.panel-title.pull-left = "#{controller_name.humanize.titleize} Listing"
+        = link_to 'Export <i class="fa fa-file-excel-o" aria-hidden="true"></i>'.html_safe, admin_registrations_path(format: 'xlsx'), class: 'pull-right', style: 'color:#fff;', title: 'Export'
+        .clearfix
       .panel-body
         .row-fluid
           == render 'filter_form'
