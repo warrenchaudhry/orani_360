@@ -16,7 +16,7 @@ class Admin::RegistrationsController < Admin::BaseController
     sort_order = params[:sort] == 'display_name' ? 'last_name' : params[:sort]
     if params[:q].present?
       keyword = params[:q].strip.downcase
-      registrations = registrations.where('TRIM(LOWER(first_name)) LIKE :keyword OR TRIM(LOWER(middle_name)) LIKE :keyword OR TRIM(LOWER(last_name)) LIKE :keyword OR registration_no LIKE :keyword', keyword: "%#{keyword}%")
+      registrations = registrations.where('TRIM(LOWER(first_name)) LIKE :keyword OR TRIM(LOWER(middle_name)) LIKE :keyword OR TRIM(LOWER(last_name)) LIKE :keyword OR registration_no LIKE :keyword OR TRIM(LOWER(grp_org_comp)) LIKE :keyword OR TRIM(LOWER(residential_address)) LIKE :keyword', keyword: "%#{keyword}%")
     end
     if params[:cat].present?
       registrations = registrations.where(category: params[:cat])
