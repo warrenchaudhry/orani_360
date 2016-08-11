@@ -4,14 +4,17 @@
     h3
       em August 14, 2016 | Orani Plaza
 br
+- if Date.current > '2016-08-10'.to_date
+  hr
+  p.lead.text-center: strong Registration is now closed.
+- else
+  .row
+    .col-lg-12
+      .panel.panel-primary
+        .panel-heading
+          | New registration
+        .panel-body
+          == render 'form'
 
-.row
-  .col-lg-12
-    .panel.panel-primary
-      .panel-heading
-        | New registration
-      .panel-body
-        == render 'form'
-
-.modal-holder
-  == render 'shared/front/terms_modal'
+  .modal-holder
+    == render 'shared/front/terms_modal'
