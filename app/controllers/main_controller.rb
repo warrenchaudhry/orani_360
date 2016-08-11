@@ -25,7 +25,8 @@ class MainController < ApplicationController
     elsif params[:page_url] == 'about'
       @meta = {
         title: 'Orani 360 - Half Marathon | About',
-        url: 'http://orani360.inbox.com.ph/about'
+        url: 'http://orani360.inbox.com.ph/about',
+        description: 'Rules and Regulations of Fun Run'
       }
     elsif params[:page_url].underscore == 'contact_us'
       @enquiry = Enquiry.new
