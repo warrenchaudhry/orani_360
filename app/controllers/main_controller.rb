@@ -22,6 +22,11 @@ class MainController < ApplicationController
         url: 'http://orani360.inbox.com.ph/runners',
         image: view_context.asset_url('runners_banner.jpg')
       }
+    elsif params[:page_url] == 'about'
+      @meta = {
+        title: 'Orani 360 - Half Marathon | About',
+        url: 'http://orani360.inbox.com.ph/about'
+      }
     elsif params[:page_url].underscore == 'contact_us'
       @enquiry = Enquiry.new
       @meta = {

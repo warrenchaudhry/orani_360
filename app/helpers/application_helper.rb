@@ -88,4 +88,12 @@ module ApplicationHelper
     end
   end
 
+  def ordinal(i)
+    ActiveSupport::Inflector.ordinal(i)
+  end
+
+  def ordinalize(i)
+    ActiveSupport::Inflector.ordinalize(i)
+  end
+
 end
