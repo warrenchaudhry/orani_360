@@ -9,6 +9,8 @@
         = sidebar_link('enquiries', 'Enquiries', 'fa fa-phone-square')
       li
         = sidebar_link('registrations', 'Registrations', 'fa fa-registered')
+      li
+        = sidebar_link('results', 'Race Results', 'fa fa-area-chart')
       - if current_user.is_admin?
         li
           = sidebar_link('users', 'Users', 'fa fa-users')

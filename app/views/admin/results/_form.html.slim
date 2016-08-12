@@ -1,0 +1,24 @@
+.form-inputs
+  = f.input :registration_id, as: :hidden, input_html: { value: @registration.id}
+  .form-group.required.result_time_finished
+    = f.label :time_finished, 'Time Finished (hh:mm:ss)', class: 'required control-label col-md-3'
+    .col-md-8.form-inline
+      = f.input :hours, collection: '00'..'23', label: false, wrapper: false, input_html: {class: 'required form-control'}
+      span &nbsp;&#x3a;&nbsp;
+      = f.input :minutes, collection: '00'..'59', label: false, wrapper: false, input_html: {class: 'required form-control'}
+      span &nbsp;&#x3a;&nbsp;
+      = f.input :seconds, collection: '00'..'59', label: false, wrapper: false, input_html: {class: 'required form-control'}
+  .form-group.result_remarks
+    = f.label :remarks, class: 'control-label col-md-3'
+    .col-md-8.form-inline
+      = f.text_area :remarks, class: 'form-control', cols: 60
+
+.form-actions
+  .row-fluid
+    .text-right
+      = f.button :submit, class: 'btn btn-primary', data: {disable_with: 'Saving....'}
+      = link_to 'Cancel', url_for(controller: controller_name, action: 'index'), class: 'btn btn-default', style: 'margin-left: 5px;'
+
+
+
+

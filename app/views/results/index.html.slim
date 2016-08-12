@@ -1,0 +1,46 @@
+.row
+  .col-lg-12
+    h1.page-header Race Results
+    = form_tag(results_path, {method: :get, class: 'form-inline', role: 'form'}) do
+      /.form-group
+      /  = text_field_tag :q, params[:q], class: 'form-control', style: 'margin-right:5px;', placeholder: 'BIB No., Last Name, First Name, Org/Club/Group', style: 'width:400px;'
+      .form-group
+        = label_tag :category
+        br
+        = select_tag :cat, options_for_select(%w(21K 10K), selected: params[:cat]), prompt: 'Category', class: 'form-control', style: 'margin-right: 5px;'
+      .form-group
+        = label_tag :g, 'Gender'
+        br
+        = select_tag :g, options_for_select(%w(Male Female), selected: params[:g]), prompt: 'Gender', class: 'form-control', style: 'margin-right:5px;'
+      .form-group
+        = label_tag :q, 'Keyword'
+        br
+        = text_field_tag :q, params[:q], class: 'form-control', style: 'margin-right:5px;', placeholder: 'BIB No., Last Name, First Name, Org/Club/Group', style: 'width:400px;'
+      button type="submit" class="btn btn-primary" style="margin-right:5px;margin-top:25px;" Filter
+      = link_to 'Clear', results_path, class: 'btn btn-default', style: "margin-top:25px;"
+    br
+    hr
+    h3.text-center Category: #{params[:cat]}
+    - if @results.any?
+      table#results-listing.table.table-bordered
+        thead
+          tr
+            th OVERALL<br>RANK
+            th GENDER<br>RANK
+            th BIB No
+            th FULL NAME
+            th GENDER
+            th GROUP / ORG. / COMPANY
+            th TIME
+        tbody
+          - @results.each do |r|
+            tr
+              td = r.overall_rank
+              td = r.gender_rank
+              td = r.registration.registration_no
+              td = r.registration.display_name
+              td = prettify_value(r.registration, 'gender')
+              td = prettify_value(r.registration, 'grp_org_comp')
+              td = r.pretty_duration
+    - else
+      p.lead No match for this category yet.

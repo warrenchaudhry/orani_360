@@ -303,6 +303,9 @@ table.info-table {
       font-weight: 900;
     }
   }
+  @media (max-width: 767px) {
+    width:100%;
+  }
 }
 
 table.borderless tbody tr td, table.borderless tbody tr th, table.borderless thead tr th {
