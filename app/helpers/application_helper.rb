@@ -53,7 +53,7 @@ module ApplicationHelper
     elsif attr == 'display_name'
       header = 'Name'
     elsif attr == 'registration_no'
-      header = 'Reg. No'
+      header = controller_name == 'results' ? 'BIB No.' : 'Reg. No'
     elsif attr == 'date_registered'
       header = 'Registered At'
     elsif attr == 'last_login_from_ip_address'
@@ -86,6 +86,18 @@ module ApplicationHelper
       concat(label)
       concat(content_tag(:i, nil, class: sort_icon_class))
     end
+  end
+
+  def cell_aligment(attr)
+    %w{registration_no display_name category gender time_finished}
+    css_align = if %w(registration_no time_finished).include?(attr)
+                  'text-right'
+                elsif attr == 'display_name'
+                  'text-left'
+                else
+                  'text-center'
+                end
+    css_align
   end
 
   def ordinal(i)

@@ -1,0 +1,37 @@
+.row
+  .col-lg-12
+    = generate_breadcrumbs
+    .panel.panel-primary
+      .panel-heading
+        = "#{action_name == 'edit' ? 'Edit' : 'Add New'} #{controller_name.singularize.humanize.titleize}"
+      .panel-body
+        table.table
+          tbody
+            tr
+              td: strong BIB No.
+              td = @registration.registration_no
+            tr
+              td: strong Racer Name
+              td = @registration.display_name
+            tr
+              td: strong Gender
+              td = @registration.gender
+            tr
+              td: strong Category
+              td = @registration.category
+            tr
+              td: strong Group/Org/Company
+              td  = prettify_value(@registration, 'grp_org_comp')
+            tr
+              td: strong Age
+              td = prettify_value(@registration, 'age')
+            tr
+              td: strong Overall Rank
+              td = @result.overall_rank
+            tr
+              td: strong Gender Rank
+              td = @result.gender_rank
+
+        = simple_form_for @result, url: admin_result_path(@result), html: {class: 'form-horizontal'}  do |f|
+          = f.error_notification
+          = render 'form', f: f

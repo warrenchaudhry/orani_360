@@ -34,6 +34,9 @@ class Registration < ActiveRecord::Base
   :default_style => :thumb
   has_one :rejected_registration
   accepts_nested_attributes_for :rejected_registration
+  has_one :result
+  accepts_nested_attributes_for :result
+
   # STATUS.each do |s|
   #   scope s.downcase.to_sym, -> { where(status: s.downcase) }
   # end
@@ -88,6 +91,10 @@ class Registration < ActiveRecord::Base
 
     def display_attributes
       %w{registration_no display_name category singlet gender status date_registered}
+    end
+
+    def result_attributes
+      %w{registration_no display_name category gender time_finished}
     end
 
     def categories
@@ -270,6 +277,10 @@ class Registration < ActiveRecord::Base
     row << self.amount # 'Amount'
     row << self.remarks # 'Remarks'
     row
+  end
+
+  def time_finished
+    result.present? ? result.pretty_duration : '--:--:--'
   end
 
   private

@@ -1,0 +1,10 @@
+= form_tag(admin_results_path, {method: :get, class: 'form-inline', role: 'form'}) do
+  .form-group
+    = text_field_tag :q, params[:q], class: 'form-control', style: 'margin-right:5px;', placeholder: 'BIB No., Last Name, First Name, Org/Club/Group', style: 'width:400px;'
+  .form-group
+    = select_tag :cat, options_for_select(%w(21K 10K), selected: params[:cat]), prompt: 'Category', class: 'form-control', style: 'margin-right:5px;'
+  .form-group
+    = select_tag :gender, options_for_select(%w(Male Female), selected: params[:gender]), prompt: 'Gender', class: 'form-control', style: 'margin-right:5px;'
+
+  button type="submit" class="btn btn-primary" style="margin-right:5px;" Search
+  = link_to 'Clear', admin_results_path, class: 'btn btn-default'

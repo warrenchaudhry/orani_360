@@ -15,11 +15,13 @@ Rails.application.routes.draw do
     put 'registrations/:id/reject', to: 'registrations#reject', as: 'reject_registration'
     resources :registrations
     resources :enquiries, only: [:index, :show, :destroy]
+    resources :results
     get 'login', to: 'sessions#new', as: :login
     delete 'logout', to: 'sessions#destroy', as: :logout
   end
   resources :registrations, only: [:new, :show, :create]
   post 'enquiry', to: 'main#send_enquiry', as: 'send_enquiry'
+  resources :results
   get '/(:page_url)', to: 'main#pages', constraints: UrlConstraint.new
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

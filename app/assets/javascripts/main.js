@@ -31,6 +31,10 @@ $(document).on("page:load ready", function(){
     });
 
     $('.table-listing').dataTable();
+    $('#results-listing').dataTable({
+        "pageLength": 50,
+        "searching": false
+    });
 
     NProgress.configure({
       showSpinner: false,
