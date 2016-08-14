@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :registrations, only: [:new, :show, :create]
   post 'enquiry', to: 'main#send_enquiry', as: 'send_enquiry'
   resources :results
+  get 'leaderboard', to: 'results#leaderboard'
   get '/(:page_url)', to: 'main#pages', constraints: UrlConstraint.new
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -30,7 +30,9 @@ $(document).on("page:load ready", function(){
         $(this).ekkoLightbox();
     });
 
-    $('.table-listing').dataTable();
+    $('.table-listing').dataTable({
+        "pageLength": 25
+    });
     $('#results-listing').dataTable({
         "pageLength": 50,
         "searching": false

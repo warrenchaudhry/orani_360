@@ -1,0 +1,36 @@
+.row
+  .col-lg-12
+    h1.page-header Leaderboard
+    - %w(21K 10K).each do |cat|
+      h3.text-center Category: #{cat}
+      - %w(male female).each do |gender|
+        h5 Top #{gender.capitalize} Finishers - #{cat}
+        table.table.table-bordered
+          thead
+            tr
+              th GENDER<br>RANK
+              th OVERALL<br>RANK
+              th BIB No
+              th FULL NAME
+              th GROUP / ORG. / COMPANY
+              th TIME
+              th DIFF
+          tbody
+            - results = @results.where(category: cat).send(gender).limit(10)
+            - if results.any?
+              - results.each do |r|
+                tr
+                  td = r.gender_rank
+                  td = r.overall_rank
+                  td = r.registration.registration_no
+                  td = r.registration.display_name
+                  td = prettify_value(r.registration, 'grp_org_comp')
+                  td = r.pretty_duration
+                  td = diff_duration(r.time_finished, results.first.time_finished)
+            - else
+              tr
+                td colspan="7"
+                  p.text-center No finishers Yet
+
+
+
