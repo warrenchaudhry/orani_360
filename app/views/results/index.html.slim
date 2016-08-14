@@ -1,6 +1,16 @@
 .row
   .col-lg-12
     h1.page-header Race Results
+    h4 Quick Search
+    .btn-group.btn-group-justified
+      = link_to '21K', results_path(cat: '21K'), class: 'btn btn-primary'
+      = link_to '21K (Male)', results_path(cat: '21K', g: 'Male'), class: 'btn btn-primary'
+      = link_to '21K (Female)', results_path(cat: '21K', g: 'Female'), class: 'btn btn-primary'
+      = link_to '10K', results_path(cat: '10K'), class: 'btn btn-primary'
+      = link_to '10K (Male)', results_path(cat: '10K', g: 'Male'), class: 'btn btn-primary'
+      = link_to '10K (Female)', results_path(cat: '10K', g: 'Female'), class: 'btn btn-primary'
+    hr
+    h4 Advanced Search
     = form_tag(results_path, {method: :get, class: 'form-inline', role: 'form'}) do
       /.form-group
       /  = text_field_tag :q, params[:q], class: 'form-control', style: 'margin-right:5px;', placeholder: 'BIB No., Last Name, First Name, Org/Club/Group', style: 'width:400px;'
@@ -15,32 +25,40 @@
       .form-group
         = label_tag :q, 'Keyword'
         br
-        = text_field_tag :q, params[:q], class: 'form-control', style: 'margin-right:5px;', placeholder: 'BIB No., Last Name, First Name, Org/Club/Group', style: 'width:400px;'
+        = text_field_tag :q, params[:q], class: 'form-control', placeholder: 'BIB No., Last Name, First Name, Org/Club/Group', style: 'width:400px;margin-right:5px;'
       button type="submit" class="btn btn-primary" style="margin-right:5px;margin-top:25px;" Filter
       = link_to 'Clear', results_path, class: 'btn btn-default', style: "margin-top:25px;"
     br
     hr
-    h3.text-center Category: #{params[:cat]}
-    - if @results.any?
-      table#results-listing.table.table-bordered
-        thead
-          tr
-            th OVERALL<br>RANK
-            th GENDER<br>RANK
-            th BIB No
-            th FULL NAME
-            th GENDER
-            th GROUP / ORG. / COMPANY
-            th TIME
-        tbody
+    - if params[:cat].present?
+      h3.text-center Category: #{params[:cat]}
+
+    table.table.table-bordered *{id: @results.any? ? 'results-listing' : nil}
+      thead
+        tr
+          th OVERALL<br>RANK
+          th GENDER<br>RANK
+          th BIB No
+          th CATEGORY
+          th FULL NAME
+          th GENDER
+          th GROUP / ORG. / COMPANY
+          th TIME
+      tbody
+        - if @results.any?
           - @results.each do |r|
             tr
               td = r.overall_rank
               td = r.gender_rank
               td = r.registration.registration_no
+              td = r.category
               td = r.registration.display_name
               td = prettify_value(r.registration, 'gender')
               td = prettify_value(r.registration, 'grp_org_comp')
               td = r.pretty_duration
-    - else
-      p.lead No match for this category yet.
+        - else
+          tr
+            td colspan="8"
+              p.text-center: strong No match found.
+
+

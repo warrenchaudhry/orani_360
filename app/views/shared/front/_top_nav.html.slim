@@ -16,8 +16,16 @@ nav.navbar.navbar-default.navbar-fixed-top.top-nav role="navigation"
           = link_to 'Registrations', new_registration_path
         li
           a href="/runners" Runners
-        li
-          a href="/results" Race Results
+        li.dropdown
+          a.dropdown-toggle data-toggle="dropdown" href="#results"
+            | Results
+            b.caret
+          ul.dropdown-menu
+            li
+              a href="/leaderboard" Leaderboard
+            li
+              a href="/results" Searchable Results
+
         li
           a href="/contact-us" Contact Us
 

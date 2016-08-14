@@ -6,6 +6,9 @@ class Result < ActiveRecord::Base
   before_validation :assign_defaults
   before_validation :generate_time_duration
 
+  scope :male, -> { where(gender: 'Male')}
+  scope :female, -> { where(gender: 'Female')}
+
   def default_duration
     self.hours = '00'
     self.minutes = '00'
@@ -28,8 +31,9 @@ class Result < ActiveRecord::Base
     Result.where("time_finished <= ? AND results.category = ? AND gender = ?", self.time_finished, self.category, self.gender).count
   end
 
-  def distance
-
+  def diff_duration(x,y)
+    diff = x - y
+    pretty_duration(diff)
   end
 
   private

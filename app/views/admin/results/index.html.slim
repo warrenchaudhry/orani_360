@@ -32,21 +32,21 @@
                         td *{class: cell_aligment(attr) } = prettify_value(reg, attr)
                       td = reg.result.present? ? reg.result.overall_rank : '--'
                       td = reg.result.present? ? reg.result.gender_rank : '--'
-                      td style="width:220px;"
+                      td style="width:180px;"
                         .btn-group role="group"
                           - if reg.result.present?
-                            = link_to url_for(controller: controller_name, action: 'show', id: reg.result.id), class: 'btn btn-sm btn-default', title: 'View' do
+                            = link_to url_for(controller: controller_name, action: 'show', id: reg.result.id), class: 'btn btn-xs btn-default', title: 'View' do
                               | View&nbsp;
                               = content_tag(:i, nil, class: 'fa fa-eye')
-                            = link_to url_for(controller: controller_name, action: 'edit', id: reg.result.id), class: 'btn btn-sm btn-default', title: 'Edit' do
+                            = link_to url_for(controller: controller_name, action: 'edit', id: reg.result.id), class: 'btn btn-xs btn-default', title: 'Edit' do
                               | Edit&nbsp;
                               = content_tag(:i, nil, class: 'fa fa-pencil')
-                            = link_to url_for(controller: controller_name, action: 'destroy', id: reg.result.id), class: 'btn btn-sm btn-default', title: 'Delete',  data: {method: 'delete', confirm: 'Are you sure you want to delete the race result for this record?'} do
+                            = link_to url_for(controller: controller_name, action: 'destroy', id: reg.result.id), class: 'btn btn-xs btn-default', title: 'Delete',  data: {method: 'delete', confirm: 'Are you sure you want to delete the race result for this record?'} do
                               | Delete&nbsp;
                               = content_tag(:i, nil, class: 'fa fa-times')
 
                           -else
-                            = link_to url_for(controller: controller_name, action: 'new', registration_id: reg.id), class: 'btn btn-sm btn-default', title: 'Add' do
+                            = link_to url_for(controller: controller_name, action: 'new', registration_id: reg.id), class: 'btn btn-xs btn-default', title: 'Add' do
                               | Add Result&nbsp;
                               = content_tag(:i, nil, class: 'fa fa-plus')
 

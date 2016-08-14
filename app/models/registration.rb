@@ -94,7 +94,7 @@ class Registration < ActiveRecord::Base
     end
 
     def result_attributes
-      %w{registration_no display_name category gender time_finished}
+      %w{registration_no display_name category gender grp_org_comp time_finished}
     end
 
     def categories
